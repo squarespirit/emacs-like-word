@@ -28,10 +28,10 @@
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map "\C-f" 'isearch-repeat-forward)
 ;; Page up/down scrolls half page at a time
-(defun scroll-up-half () (interactive) (scroll-up (window-half-height)))
-(defun scroll-down-half () (interactive) (scroll-down (window-half-height)))
-(global-set-key (kbd "<prior>") 'scroll-up-half)
-(global-set-key (kbd "<next>") 'scroll-down-half)
+(defun scroll-up-half () (interactive) (scroll-up (/ (window-body-height) 2)))
+(defun scroll-down-half () (interactive) (scroll-down (/ (window-body-height) 2)))
+(global-set-key (kbd "<prior>") 'scroll-down-half) ; note: down = backward, up = forward
+(global-set-key (kbd "<next>") 'scroll-up-half)
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
 ;; Make esc cancel like C-g
