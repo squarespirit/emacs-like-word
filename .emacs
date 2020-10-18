@@ -27,6 +27,8 @@
 ;; Use C-f to do searches
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map "\C-f" 'isearch-repeat-forward)
+;; Taken from VScode
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
 ;; Page up/down scrolls half page at a time
 (defun scroll-up-half () (interactive) (scroll-up (/ (window-body-height) 2)))
 (defun scroll-down-half () (interactive) (scroll-down (/ (window-body-height) 2)))
@@ -39,11 +41,13 @@
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 ;; Pass through win key, so Windows keyboard shortcuts still work
 (setq w32-pass-lwindow-to-system nil)
+;; Unbind CUA rectangle selection (conflicts with org C-ret)
+(define-key cua-global-keymap (kbd "C-<return>") nil)
 
 ;; Looks
 (setq-default cursor-type 'bar) 
