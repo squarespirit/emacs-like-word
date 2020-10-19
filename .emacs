@@ -40,10 +40,9 @@
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; 2 lines at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
 ;; Pass through win key, so Windows keyboard shortcuts still work
 (setq w32-pass-lwindow-to-system nil)
 ;; Unbind CUA rectangle selection (conflicts with org C-ret)
@@ -59,6 +58,8 @@
 (global-visual-line-mode +1)
 ;; frame title. Why is :eval needed?
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq-default scroll-margin 1)
 
 ;; Files
 ;; https://www.johndcook.com/blog/emacs_windows/
