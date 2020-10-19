@@ -54,6 +54,8 @@
 ;; Use variable pitch in org mode
 ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
 (setq-default visual-line-mode 't)
+;; frame title. Why is :eval needed?
+(setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
 
 ;; Files
 ;; https://www.johndcook.com/blog/emacs_windows/
