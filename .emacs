@@ -53,7 +53,10 @@
 (setq-default cursor-type 'bar) 
 ;; Use variable pitch in org mode
 ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-(setq-default visual-line-mode 't)
+;; Note: (setq-default visual-line-mode t) was somewhat buggy. It did not work
+;; when org started up sometimes. This might work
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Visual-Line-Mode.html
+(global-visual-line-mode +1)
 ;; frame title. Why is :eval needed?
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
 
