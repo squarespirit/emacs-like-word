@@ -60,6 +60,10 @@
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq-default scroll-margin 1)
+;; Lose the scroll bar, which is only a little useful, but gain the ability to resize vertical
+;; splits w/ the mouse
+;; https://stackoverflow.com/a/9646770
+(scroll-bar-mode -1)
 
 ;; Files
 ;; https://www.johndcook.com/blog/emacs_windows/
