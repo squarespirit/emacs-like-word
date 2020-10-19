@@ -68,8 +68,8 @@
 
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (set-face-attribute 'default nil :font "Consolas"))
- (t (set-face-attribute 'default nil :font "DejaVu Sans Mono")))
+  (set-face-attribute 'default nil :font "Consolas" :height 120))
+ (t (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 120)))
 
 ;; Sessions
 (desktop-save-mode 1)
