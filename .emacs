@@ -28,6 +28,17 @@
 ;; Use C-f to do searches
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map "\C-f" 'isearch-repeat-forward)
+;; Auto wrap isearch https://stackoverflow.com/a/287067
+(defadvice isearch-search (after isearch-no-fail activate)
+  (unless isearch-success
+    (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
+    (ad-activate 'isearch-search)
+    (isearch-repeat (if isearch-forward 'forward))
+    (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
+    (ad-activate 'isearch-search)))
+;; Prevents issue where you have to press backspace twice when
+;; trying to remove the first character that fails a search
+(define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
 ;; Page up/down scrolls half page at a time
@@ -109,6 +120,10 @@
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
 (setq-default org-agenda-sorting-strategy '(timestamp-up))
+;; Numeric priorities. TODO this does not appear to work
+(setq-default org-priority-highest 1)
+(setq-default org-priority-lowest 3)
+(setq-default org-priority-default 2)
 ;; Todo states
 (define-key org-mode-map (kbd "C-t") 'org-todo)
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
