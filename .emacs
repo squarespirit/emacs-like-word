@@ -92,6 +92,8 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+;; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html
+(setq-default org-columns-default-format "%50ITEM %TODO %1PRIORITY %20TAGS %20DEADLINE %20SCHEDULED")
 
 ;; Which key
 (which-key-mode 1)
@@ -108,11 +110,13 @@
 ;; (setq centaur-tabs-set-icons t) ; Unfortunately, icons are very slow on windows...
 (setq centaur-tabs-set-bar 'over)
 (setq centaur-tabs-cycle-scope 'tabs)
-(defun centaur-tabs-buffer-groups ()
-  (list
-   (cond
-    ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-    (t "text"))))
+;; (defun centaur-tabs-buffer-groups ()
+  ;; (list
+  ;;  (cond
+  ;;   ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+;;   (t "text"))))
+;; This is naive but at least reduces confusion about multiple groups
+(defun centaur-tabs-buffer-groups () (list "single-group"))
 (setq centaur-tabs-set-modified-marker t)
 (setq centaur-tabs-modified-marker "●")
 
@@ -123,7 +127,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(cua-mode t nil (cua-base))
- '(org-agenda-files (quote ("~/todos.org")))
+ '(org-agenda-files (quote ("~/notes/todos.org")))
  '(package-selected-packages (quote (centaur-tabs which-key org-bullets use-package))))
 ;;(custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -131,3 +135,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
 ;; '(default ((t (:inherit nil :stipple nil :background "SystemWindow" :foreground ;;"SystemWindowText" :inverse-video nil :box nil :strike-through nil :overline nil ;;:underline nil :slant normal :weight normal :height 120 :width normal :foundry "outline" :family "Consolas")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
