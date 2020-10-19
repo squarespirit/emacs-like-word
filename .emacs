@@ -99,6 +99,8 @@
 ;; Make org give up shift-arrow keys
 ;; https://orgmode.org/manual/Conflicts.html
 (setq-default org-replace-disputed-keys t)
+;; More natural ellipsis
+(setq org-ellipsis "⤵")
 (use-package org-bullets
     :config
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
