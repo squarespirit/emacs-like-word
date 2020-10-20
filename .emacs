@@ -147,6 +147,15 @@ This command does not push text to `kill-ring'."
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
 
+;; Special paste in org mode
+;; Redefine `yank` for org-mode. cua-paste indirectly calls it.
+(fset 'original-yank (symbol-function 'yank))
+(defun yank (&optional arg)
+  (interactive "P")
+  (if (eq major-mode 'org-mode)
+      (org-paste-special arg)
+    (original-yank arg)))
+
 ;; Great command for subtree editing
 ;; Except, while org-mark-subtree puts the point at the beginning of the
 ;; selection, put it at the end, which may be more natural for
