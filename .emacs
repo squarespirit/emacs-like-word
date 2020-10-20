@@ -127,6 +127,12 @@ This command does not push text to `kill-ring'."
 ;; Org
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Make org give up shift-arrow keys
+;; https://orgmode.org/manual/Conflicts.html
+;; Must be set before org loads, so set it early
+(setq-default org-replace-disputed-keys t)
+(setq-default org-support-shift-select t)
+
 ;; Looks
 (setq-default org-startup-indented t)
 ;; More natural ellipsis
@@ -134,10 +140,6 @@ This command does not push text to `kill-ring'."
 (use-package org-bullets
     :config
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-;; Make org give up shift-arrow keys
-;; https://orgmode.org/manual/Conflicts.html
-(setq-default org-replace-disputed-keys t)
 
 (setq-default org-special-ctrl-a/e t)
 
