@@ -173,7 +173,19 @@ This command does not push text to `kill-ring'."
 ;; Y looks like a tree :)
 (define-key org-mode-map (kbd "C-y") 'my-mark-subtree)
 
-;; Previous/next visible heading with smart beginning of line
+;; Previous/next heading with smart beginning of line
+
+;; Overcomplicated solution to go to the parent heading. Not used.
+;; Not just outline-up-heading because if you are *not* on a heading
+;; line, it essentially moves up two headings. Only move up one.
+;; (defun my-parent-heading (arg)
+;;   (interactive "p")
+;;   (if (org-at-heading-p)
+;;       (if (equal 1 (funcall outline-level))
+;; 	  (org-previous-visible-heading arg)
+;; 	(outline-up-heading arg))
+;;       (org-previous-visible-heading arg))
+;;   (org-beginning-of-line))
 (defun my-previous-visible-heading (arg)
   (interactive "p")
   (org-previous-visible-heading arg)
@@ -184,6 +196,19 @@ This command does not push text to `kill-ring'."
   (org-next-visible-heading arg)
   (org-beginning-of-line))
 (define-key org-mode-map (kbd "C-N") 'my-next-visible-heading)
+
+(defun my-backward-heading-same-level (arg)
+  (interactive "p")
+  (org-backward-heading-same-level arg)
+  (org-beginning-of-line))
+(define-key org-mode-map (kbd "C-S-P") 'my-backward-heading-same-level)
+(defun my-forward-heading-same-level (arg)
+  (interactive "p")
+  (org-forward-heading-same-level arg)
+  (org-beginning-of-line))
+(define-key org-mode-map (kbd "C-S-N") 'my-forward-heading-same-level)
+
+
 ;; Previous/next paragraph with smart beginning of line
 (defun my-backward-paragraph ()
   (interactive)
