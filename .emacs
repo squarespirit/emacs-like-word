@@ -25,6 +25,26 @@
   "Simulate invoking menu item as if by the mouse; see `use-dialog-box'."
   (let ((last-nonmenu-event nil))
     ad-do-it))
+;; Backspace/delete should not copy to clipboard
+;; http://ergoemacs.org/emacs/emacs_kill-ring.html
+(defun my-delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (delete-region
+   (point)
+   (progn
+     (forward-word arg)
+     (point))))
+(defun my-backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (my-delete-word (- arg)))
+(global-set-key (kbd "<C-backspace>") 'my-backward-delete-word)
+(global-set-key (kbd "<C-delete>") 'my-delete-word)
 ;; Use C-f to do searches
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map "\C-f" 'isearch-repeat-forward)
