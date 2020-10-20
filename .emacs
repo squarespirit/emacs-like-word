@@ -68,6 +68,8 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<next>") 'scroll-up-half)
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
+;; Make it easier to switch windows
+(global-set-key (kbd "M-w") 'other-window)
 ;; Make esc cancel like C-g
 ;; https://www.reddit.com/r/emacs/comments/67rlfr/esc_vs_cg/dgsozkc/
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
