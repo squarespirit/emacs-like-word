@@ -61,11 +61,6 @@ This command does not push text to `kill-ring'."
 (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
-;; Page up/down scrolls half page at a time
-(defun scroll-up-half () (interactive) (scroll-up (/ (window-body-height) 2)))
-(defun scroll-down-half () (interactive) (scroll-down (/ (window-body-height) 2)))
-(global-set-key (kbd "<prior>") 'scroll-down-half) ; note: down = backward, up = forward
-(global-set-key (kbd "<next>") 'scroll-up-half)
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
 ;; Make it easier to switch windows
