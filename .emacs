@@ -160,10 +160,16 @@ This command does not push text to `kill-ring'."
 ;; Except, while org-mark-subtree puts the point at the beginning of the
 ;; selection, put it at the end, which may be more natural for
 ;; word processors
+;; No, don't do that anymore. Subtrees can get big; keep the mark on the
+;; heading since it's nice to see the heading of the subtree you selected.
+;; Consecutive calls mark bigger subtrees.
+;; Bug: the subtree is not shift selected, so arrow keys do not cancel
+;; the selection
 (defun my-mark-subtree (&optional up)
   (interactive "P")
-  (org-mark-subtree up)
-  (exchange-point-and-mark))
+  (if (eq last-command 'my-mark-subtree)
+      (outline-up-heading 1)) ; move up 1 level
+  (org-mark-subtree up))
 ;; Y looks like a tree :)
 (define-key org-mode-map (kbd "C-y") 'my-mark-subtree)
 
