@@ -161,6 +161,22 @@ This command does not push text to `kill-ring'."
   (org-next-visible-heading arg)
   (org-beginning-of-line))
 (define-key org-mode-map (kbd "C-N") 'my-next-visible-heading)
+;; Previous/next paragraph with smart beginning of line
+(defun my-backward-paragraph ()
+  (interactive)
+  ;; If we're at the org-beginning-of-line, org-backward-paragraph
+  ;; just goes to the actual beginning of line (not the previous paragraph).
+  ;; So this is needed.
+  (beginning-of-line)
+  (org-backward-paragraph)
+  (org-beginning-of-line))
+(define-key org-mode-map (kbd "<C-up>") 'my-backward-paragraph)
+(defun my-forward-paragraph ()
+  (interactive)
+  (beginning-of-line)
+  (org-forward-paragraph)
+  (org-beginning-of-line))
+(define-key org-mode-map (kbd "<C-down>") 'my-forward-paragraph)
 
 ;; Swap M-left/right and S-M-left/right, so that all the unshifted
 ;; M-<arrow keys> work on subtrees.
