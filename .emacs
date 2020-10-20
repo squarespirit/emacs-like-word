@@ -149,11 +149,16 @@ This command does not push text to `kill-ring'."
 
 ;; Special paste in org mode
 ;; Redefine `yank` for org-mode. cua-paste indirectly calls it.
+;; Note: if paste has bugs, run original-yank
 (fset 'original-yank (symbol-function 'yank))
 (defun yank (&optional arg)
   (interactive "P")
   (if (eq major-mode 'org-mode)
-      (org-paste-special arg)
+      ;; Copied from definition of org-paste-special
+      (cond
+       ((org-at-table-p) (org-table-paste-rectangle))
+       ((org-kill-is-subtree-p) (org-paste-subtree arg))
+       (t (original-yank arg)))
     (original-yank arg)))
 
 ;; Great command for subtree editing
