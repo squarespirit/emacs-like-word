@@ -120,6 +120,35 @@
 (require 'org)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
+;; Swap M-left/right and S-M-left/right, so that all the unshifted
+;; M-<arrow keys> work on subtrees.
+;; May be very controversial.
+;; Issue: org-metashiftleft does not check for hidden items.
+;; (defun org-metaleft-on-subtree (&optional arg)
+;;   (interactive "P") ;; arg is prefix argument
+;;   (if (org-at-heading-p)
+;;       (org-promote-subtree)
+;;     (org-metaleft arg)))
+;; (define-key org-mode-map (kbd "M-<left>") 'org-metaleft-on-subtree)
+;; (defun org-metaright-on-subtree (&optional arg)
+;;   (interactive "P") ;; arg is prefix argument
+;;   (if (org-at-heading-p)
+;;       (org-demote-subtree)
+;;     (org-metaright arg)))
+;; (define-key org-mode-map (kbd "M-<right>") 'org-metaright-on-subtree)
+;; (defun org-shiftmetaleft-single ()
+;;   (interactive)
+;;   (if (org-at-heading-p)
+;;       (org-do-promote)
+;;     (org-shiftmetaleft)))
+;; (define-key org-mode-map (kbd "S-M-<left>") 'org-shiftmetaleft-single)
+;; (defun org-shiftmetaright-single ()
+;;   (interactive)
+;;   (if (org-at-heading-p)
+;;       (org-do-demote)
+;;     (org-shiftmetaright)))
+;; (define-key org-mode-map (kbd "S-M-<right>") 'org-shiftmetaright-single)
+
 (setq-default org-agenda-sorting-strategy '(timestamp-up))
 ;; Numeric priorities. TODO this does not appear to work
 (setq-default org-priority-highest 1)
