@@ -145,6 +145,17 @@ This command does not push text to `kill-ring'."
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
 
+;; Great command for subtree editing
+;; Except, while org-mark-subtree puts the point at the beginning of the
+;; selection, put it at the end, which may be more natural for
+;; word processors
+(defun my-mark-subtree (&optional up)
+  (interactive "P")
+  (org-mark-subtree up)
+  (exchange-point-and-mark))
+;; Y looks like a tree :)
+(define-key org-mode-map (kbd "C-y") 'my-mark-subtree)
+
 ;; Previous/next visible heading with smart beginning of line
 (defun my-previous-visible-heading (arg)
   (interactive "p")
