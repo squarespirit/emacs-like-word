@@ -49,6 +49,7 @@
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
 ;; Make esc cancel like C-g
+;; https://www.reddit.com/r/emacs/comments/67rlfr/esc_vs_cg/dgsozkc/
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
@@ -127,7 +128,8 @@
 ;; Todo states
 (define-key org-mode-map (kbd "C-t") 'org-todo)
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
-
+;; Nice way to move around
+(define-key org-mode-map (kbd "C-j") 'org-goto)
 ;; Suggested global keybinds in https://orgmode.org/manual/Activation.html
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
