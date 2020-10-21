@@ -215,20 +215,30 @@ This command does not push text to `kill-ring'."
 
 
 ;; Previous/next paragraph with smart beginning of line
+;; Unbind C-S-up/down so that shift selection can take place.
+;; They were org-clock-timestamps-up/down.
+;; https://orgmode.org/manual/Clocking-commands.html
+;; May be controversial.
+(define-key org-mode-map (kbd "<C-S-up>") nil)
+(define-key org-mode-map (kbd "<C-S-down>") nil)
 (defun my-backward-paragraph ()
-  (interactive)
-  ;; If we're at the org-beginning-of-line, org-backward-paragraph
-  ;; just goes to the actual beginning of line (not the previous paragraph).
-  ;; So this is needed.
+  (interactive "^")
+  ;; If we're at the smart beginning of line (in front of stars),
+  ;; org-backward-paragraph just goes to the actual beginning of line
+  ;; (not the previous paragraph). So this is needed.
   (beginning-of-line)
   (org-backward-paragraph)
-  (org-beginning-of-line))
+  ;; When mark is active, we want actual beginning of line, in order to
+  ;; select headings.
+  (unless mark-active
+    (org-beginning-of-line)))
 (define-key org-mode-map (kbd "<C-up>") 'my-backward-paragraph)
 (defun my-forward-paragraph ()
-  (interactive)
+  (interactive "^")
   (beginning-of-line)
   (org-forward-paragraph)
-  (org-beginning-of-line))
+  (unless mark-active
+    (org-beginning-of-line)))
 (define-key org-mode-map (kbd "<C-down>") 'my-forward-paragraph)
 
 ;; Swap M-left/right and S-M-left/right, so that all the unshifted
