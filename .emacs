@@ -92,6 +92,19 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<S-f10>") 'delete-other-windows)
 (global-set-key (kbd "<M-f10>") 'delete-window)
 
+;; Buffer switcher
+(require 'bs)
+(add-to-list 'bs-configurations
+             '("targets" nil nil nil
+	       (lambda (buf)
+		 ((not (string-equal "*" (substring (buffer-name buf) 0 1)))
+		  "Normal"))))
+(defun bs-show-and-goto-alternate (arg)
+  (interactive "P")
+  (bs-show arg)
+  (forward-line))
+(global-set-key (kbd "C-e") 'bs-show-and-goto-alternate)
+
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
 ;; No overwrite mode
@@ -171,6 +184,8 @@ This command does not push text to `kill-ring'."
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (setq-default org-special-ctrl-a/e t)
+;; Do not override global C-e
+(define-key org-mode-map (kbd "C-e") nil)
 
 (require 'org)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
