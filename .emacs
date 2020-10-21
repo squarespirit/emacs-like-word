@@ -64,15 +64,20 @@ This command does not push text to `kill-ring'."
 (setq-default search-exit-option 'edit)
 (setq-default isearch-allow-scroll t)
 (define-key isearch-mode-map (kbd "C-f") 'isearch-repeat-forward)
+(define-key isearch-mode-map (kbd "<f3>") 'isearch-repeat-forward)
+(define-key isearch-mode-map (kbd "<S-f3>") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
 ;; Make it like search in other apps;
 ;; enter gives you the next result.
 ;; esc to exit.
 ;; Note: C-g still aborts the search and returns to original location
 ;; Important: bind as <return> (for GUIs) and not RET (for terminals)
 ;; http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html
-(define-key isearch-mode-map (kbd "<return>") 'isearch-repeat-forward)
-(define-key isearch-mode-map (kbd "<S-return>") 'isearch-repeat-backward)
-(define-key isearch-mode-map (kbd "<escape>") 'isearch-exit)
+;; Actually, don't do this. With the defaults (return = exit search,
+;; esc = abort search), you can choose where to end up after search.
+;; (define-key isearch-mode-map (kbd "<return>") 'isearch-repeat-forward)
+;; (define-key isearch-mode-map (kbd "<S-return>") 'isearch-repeat-backward)
+;; (define-key isearch-mode-map (kbd "<escape>") 'isearch-exit)
 ;; Auto wrap isearch https://stackoverflow.com/a/287067
 ;;(defadvice isearch-search (after isearch-no-fail activate)
 ;;  (unless isearch-success
