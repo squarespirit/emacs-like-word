@@ -83,7 +83,11 @@ This command does not push text to `kill-ring'."
 ;;    (ad-activate 'isearch-search)))
 ;; Prevents issue where you have to press backspace twice when
 ;; trying to remove the first character that fails a search
-;; (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
+(define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
+;;
+(setq-default isearch-nonincremental t)
+
+(global-set-key (kbd "<f9>") 'other-window)
 
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
