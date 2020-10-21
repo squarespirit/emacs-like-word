@@ -377,8 +377,24 @@ and returns at first non-nil value."
 ;; Todo states
 (define-key org-mode-map (kbd "C-t") 'org-todo)
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
-;; Nice way to move around
+
+;; org goto - nice way to move around
 (define-key org-mode-map (kbd "C-j") 'org-goto)
+;; Make esc exit.
+;; Would add this function as advice; but org-goto--set-map seems to be
+;; private
+;; (defun add-extra-keys-to-org-goto-map ()
+;;  (define-key org-goto-map (kbd "<escape>") 'org-goto-quit))
+;; (add-function 'org-goto--set-map)
+;; And left/right should not exit; that is quite jarring.
+;; Actually this is maybe not a good idea.
+;; (defun org-goto-left ()
+;;   (interactive)
+;;   (backward-char))
+;; (defun org-goto-right ()
+;;   (interactive)
+;;   (forward-char))
+
 ;; Suggested global keybinds in https://orgmode.org/manual/Activation.html
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
