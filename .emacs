@@ -87,14 +87,16 @@ This command does not push text to `kill-ring'."
 ;;
 (setq-default isearch-nonincremental t)
 
-(global-set-key (kbd "<f9>") 'other-window)
+;; Make it easier to switch windows
+(global-set-key (kbd "<f10>") 'other-window)
+(global-set-key (kbd "<S-f10>") 'delete-other-windows)
+(global-set-key (kbd "<M-f10>") 'delete-window)
 
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
-;; Make it easier to switch windows
-(global-set-key (kbd "M-w") 'other-window)
+
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; 2 lines at a time
