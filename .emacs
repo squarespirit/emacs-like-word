@@ -14,6 +14,11 @@
              '("melpa" . "https://melpa.org/packages/") t)
 
 ;; Keybinds
+;; Make esc cancel like C-g
+;; https://www.reddit.com/r/emacs/comments/67rlfr/esc_vs_cg/dgsozkc/
+;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+;; https://stackoverflow.com/a/650386
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (cua-mode t)
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-w") 'kill-this-buffer)
@@ -45,29 +50,47 @@ This command does not push text to `kill-ring'."
   (my-delete-word (- arg)))
 (global-set-key (kbd "<C-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "<C-delete>") 'my-delete-word)
+
 ;; Use C-f to do searches
 (global-set-key (kbd "C-f") 'isearch-forward)
-(define-key isearch-mode-map "\C-f" 'isearch-repeat-forward)
+;; Switch to minibuffer when starting search
+;; Doesn't work
+;; (defun switch-to-minibuffer ()
+;;   (if (active-minibuffer-window)
+;;       (select-window (active-minibuffer-window))))
+;; (add-hook 'isearch-mode-hook 'switch-to-minibuffer)
+;; Allow ctrl sequences to edit the search
+;; Seems like only in emacs 27.1
+(setq-default search-exit-option 'edit)
+(setq-default isearch-allow-scroll t)
+(define-key isearch-mode-map (kbd "C-f") 'isearch-repeat-forward)
+;; Make it like search in other apps;
+;; enter gives you the next result.
+;; esc to exit.
+;; Note: C-g still aborts the search and returns to original location
+;; Important: bind as <return> (for GUIs) and not RET (for terminals)
+;; http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html
+(define-key isearch-mode-map (kbd "<return>") 'isearch-repeat-forward)
+(define-key isearch-mode-map (kbd "<S-return>") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "<escape>") 'isearch-exit)
 ;; Auto wrap isearch https://stackoverflow.com/a/287067
-(defadvice isearch-search (after isearch-no-fail activate)
-  (unless isearch-success
-    (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
-    (ad-activate 'isearch-search)
-    (isearch-repeat (if isearch-forward 'forward))
-    (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
-    (ad-activate 'isearch-search)))
+;;(defadvice isearch-search (after isearch-no-fail activate)
+;;  (unless isearch-success
+;;    (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
+;;    (ad-activate 'isearch-search)
+;;    (isearch-repeat (if isearch-forward 'forward))
+;;    (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
+;;    (ad-activate 'isearch-search)))
 ;; Prevents issue where you have to press backspace twice when
 ;; trying to remove the first character that fails a search
-(define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
+;; (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
+
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
 ;; Make it easier to switch windows
 (global-set-key (kbd "M-w") 'other-window)
-;; Make esc cancel like C-g
-;; https://www.reddit.com/r/emacs/comments/67rlfr/esc_vs_cg/dgsozkc/
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; 2 lines at a time
