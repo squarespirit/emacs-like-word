@@ -104,6 +104,7 @@ This command does not push text to `kill-ring'."
   (bs-show arg)
   (forward-line))
 (global-set-key (kbd "C-e") 'bs-show-and-goto-alternate)
+(define-key bs-mode-map (kbd "<escape>") 'bs-abort)
 
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
