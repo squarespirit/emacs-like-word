@@ -178,8 +178,9 @@ This command does not push text to `kill-ring'."
 ;; Make org give up shift-arrow keys
 ;; https://orgmode.org/manual/Conflicts.html
 ;; Must be set before org loads, so set it early
-(setq-default org-replace-disputed-keys t)
-(setq-default org-support-shift-select t)
+;; (setq-default org-replace-disputed-keys t)
+;; Support shift-selection almost always...except editing timestamps
+(setq-default org-support-shift-select 'always)
 
 ;; Looks
 (setq-default org-startup-indented t)
