@@ -98,18 +98,21 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<M-f10>") 'delete-window)
 
 ;; Buffer switcher
-(require 'bs)
-(add-to-list 'bs-configurations
-             '("targets" nil nil nil
-	       (lambda (buf)
-		 ((not (string-equal "*" (substring (buffer-name buf) 0 1)))
-		  "Normal"))))
-(defun bs-show-and-goto-alternate (arg)
-  (interactive "P")
-  (bs-show arg)
-  (forward-line))
-(global-set-key (kbd "C-e") 'bs-show-and-goto-alternate)
-(define-key bs-mode-map (kbd "<escape>") 'bs-abort)
+;; (require 'bs)
+;; (add-to-list 'bs-configurations
+;;              '("targets" nil nil nil
+;; 	       (lambda (buf)
+;; 		 ((not (string-equal "*" (substring (buffer-name buf) 0 1)))
+;; 		  "Normal"))))
+;; (defun bs-show-and-goto-alternate (arg)
+;;   (interactive "P")
+;;   (bs-show arg)
+;;   (forward-line))
+;; (global-set-key (kbd "C-e") 'bs-show-and-goto-alternate)
+;; (define-key bs-mode-map (kbd "<escape>") 'bs-abort)
+;; A better buffer switcher, with auto isearch
+(ido-mode +1)
+(global-set-key (kbd "C-e") 'ido-switch-buffer)
 
 ;; Taken from VScode
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
