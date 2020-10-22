@@ -93,9 +93,11 @@ This command does not push text to `kill-ring'."
 (setq-default isearch-nonincremental t)
 
 ;; Make it easier to switch windows
-(global-set-key (kbd "<f10>") 'other-window)
-(global-set-key (kbd "<S-f10>") 'delete-other-windows)
-(global-set-key (kbd "<M-f10>") 'delete-window)
+;; Why f12 is better than f10: My RH is commonly on the arrow keys, actually.
+;; So f12 is closer.
+(global-set-key (kbd "<f12>") 'other-window)
+(global-set-key (kbd "<S-f12>") 'delete-other-windows)
+(global-set-key (kbd "<M-f12>") 'delete-window)
 
 ;; Buffer switcher
 ;; (require 'bs)
