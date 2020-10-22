@@ -400,11 +400,12 @@ and returns at first non-nil value."
    (t (org-modifier-cursor-error))))
 (define-key org-mode-map (kbd "<M-S-right>") 'my-shiftmetaright)
 
-(setq-default org-agenda-sorting-strategy '(timestamp-up))
+;; (setq-default org-agenda-sorting-strategy '(timestamp-up))
 ;; Numeric priorities. TODO this does not appear to work
-(setq-default org-priority-highest 1)
-(setq-default org-priority-lowest 3)
-(setq-default org-priority-default 2)
+;; (setq-default org-priority-highest 1)
+;; (setq-default org-priority-lowest 3)
+;; (setq-default org-priority-default 2)
+
 ;; Todo states
 (define-key org-mode-map (kbd "C-t") 'org-todo)
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
@@ -432,6 +433,14 @@ and returns at first non-nil value."
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html
 (setq-default org-columns-default-format "%50ITEM %TODO %1PRIORITY %20TAGS %20DEADLINE %20SCHEDULED")
+
+(require 'org-agenda)
+(define-key org-agenda-mode-map (kbd "<escape>") 'org-agenda-quit)
+(defun org-agenda-cannot-be-saved ()
+  (interactive)
+  (user-error "Org agenda cannot be saved"))
+(define-key org-agenda-mode-map (kbd "C-s") 'org-agenda-cannot-be-saved)
+
 
 ;; Which key
 (which-key-mode 1)
