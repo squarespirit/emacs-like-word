@@ -98,6 +98,15 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<f12>") 'other-window)
 (global-set-key (kbd "<S-f12>") 'delete-other-windows)
 (global-set-key (kbd "<M-f12>") 'delete-window)
+(defun ergo-split-window ()
+  (interactive)
+  (let ((new-win
+	 (if (> (window-width) 160)
+	     (split-window-right)
+	   (split-window-below))))
+    (select-window new-win)))
+;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
+
 
 ;; Buffer switcher
 ;; (require 'bs)
