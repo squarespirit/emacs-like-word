@@ -30,11 +30,12 @@
 (global-set-key (kbd "C-S-q") 'save-buffers-kill-terminal)
 ;; C-o open; complicated stuff to open w/ GUI instead of command line
 ;; https://stackoverflow.com/a/26484229
-(global-set-key (kbd "C-o") 'menu-find-file-existing)
-(defadvice find-file-read-args (around find-file-read-args-always-use-dialog-box act)
-  "Simulate invoking menu item as if by the mouse; see `use-dialog-box'."
-  (let ((last-nonmenu-event nil))
-    ad-do-it))
+;; (global-set-key (kbd "C-o") 'menu-find-file-existing)
+;; (defadvice find-file-read-args (around find-file-read-args-always-use-dialog-box act)
+;;   "Simulate invoking menu item as if by the mouse; see `use-dialog-box'."
+;;   (let ((last-nonmenu-event nil))
+;;     ad-do-it))
+(global-set-key (kbd "C-o") 'find-file)
 ;; Backspace/delete should not copy to clipboard
 ;; http://ergoemacs.org/emacs/emacs_kill-ring.html
 (defun my-delete-word (arg)
