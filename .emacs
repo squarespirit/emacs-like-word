@@ -1,7 +1,11 @@
+;; Local Variables:
+;; eval: (outline-minor-mode +1)
+;; End:
+
 ;; Useful links
 ;; https://zzamboni.org/post/beautifying-org-mode-in-emacs
 
-;; Packages
+;;; Packages
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -13,12 +17,13 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
-;; Keybinds
+;;; Keybinds for basic editing
 ;; Make esc cancel like C-g
 ;; https://www.reddit.com/r/emacs/comments/67rlfr/esc_vs_cg/dgsozkc/
 ;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;; https://stackoverflow.com/a/650386
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; I think CUA mode really reduces confusion when switching to other apps
 (cua-mode t)
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-w") 'kill-this-buffer)
@@ -140,7 +145,7 @@ This command does not push text to `kill-ring'."
 ;; Unbind CUA rectangle selection (conflicts with org C-ret)
 (define-key cua-global-keymap (kbd "C-<return>") nil)
 
-;; Looks
+;;; Looks
 ;; Solarized theme https://github.com/bbatsov/solarized-emacs
 (setq solarized-use-variable-pitch nil)
 ;; Avoid all font-size changes
@@ -166,7 +171,8 @@ This command does not push text to `kill-ring'."
 ;; https://stackoverflow.com/a/9646770
 (scroll-bar-mode -1)
 
-;; Files
+
+;;; Files and sessions
 ;; https://www.johndcook.com/blog/emacs_windows/
 ;; Use temp folder for backup files
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
@@ -185,10 +191,8 @@ This command does not push text to `kill-ring'."
 ;; Sessions
 (desktop-save-mode 1)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;; Org
+;;;; Basic Org keybindings
 ;; Make org give up shift-arrow keys
 ;; https://orgmode.org/manual/Conflicts.html
 ;; Must be set before org loads, so set it early
@@ -445,6 +449,7 @@ and returns at first non-nil value."
 ;; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html
 (setq-default org-columns-default-format "%50ITEM %TODO %1PRIORITY %20TAGS %20DEADLINE %20SCHEDULED")
 
+;;; Agenda
 (require 'org-agenda)
 (define-key org-agenda-mode-map (kbd "<escape>") 'org-agenda-quit)
 (defun org-agenda-cannot-be-saved ()
@@ -453,10 +458,10 @@ and returns at first non-nil value."
 (define-key org-agenda-mode-map (kbd "C-s") 'org-agenda-cannot-be-saved)
 
 
-;; Which key
+;;; Which key
 (which-key-mode 1)
 
-;; Tabs
+;;; Tabs
 (use-package centaur-tabs
   :demand
   :config
@@ -485,6 +490,6 @@ and returns at first non-nil value."
 (set-face-attribute 'centaur-tabs-unselected nil :background "#CCCCCC" :foreground "black")
 (set-face-attribute 'centaur-tabs-unselected-modified nil :background "#CCCCCC" :foreground "black")
 
-;; Customize
+;;; Customize
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
