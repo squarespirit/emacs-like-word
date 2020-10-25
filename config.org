@@ -184,6 +184,7 @@ https://oremacs.com/swiper/#getting-started
   (load-theme 'solarized-light t))
 
 (setq-default cursor-type 'bar)
+(global-hl-line-mode +1)
 
 ;; Note: (setq-default visual-line-mode t) is somewhat buggy. It did not work
 ;; when org started up sometimes. This might work
