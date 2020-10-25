@@ -163,6 +163,8 @@ https://oremacs.com/swiper/#getting-started
   (counsel-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
+  ;; Prevent backspace from closing the buffer, a little surprising
+  (setq ivy-on-del-error-function nil)
   :bind (("C-f" . swiper)
          ("C-o" . counsel-find-file)
          ("C-e" . ivy-switch-buffer)))
