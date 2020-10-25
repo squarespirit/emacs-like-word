@@ -147,25 +147,30 @@ This command does not push text to `kill-ring'."
 * Looks
 #+BEGIN_SRC emacs-lisp
 ;; Solarized theme https://github.com/bbatsov/solarized-emacs
-(setq solarized-use-variable-pitch nil)
-;; Avoid all font-size changes
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
-(load-theme 'solarized-light t)
-(setq-default cursor-type 'bar) 
-;; Use variable pitch in org mode
-;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-;; Note: (setq-default visual-line-mode t) was somewhat buggy. It did not work
+(use-package solarized-theme
+  :config
+  (setq solarized-use-variable-pitch nil)
+  ;; Avoid all font-size changes
+  (setq solarized-height-minus-1 1.0)
+  (setq solarized-height-plus-1 1.0)
+  (setq solarized-height-plus-2 1.0)
+  (setq solarized-height-plus-3 1.0)
+  (setq solarized-height-plus-4 1.0)
+  (load-theme 'solarized-light t))
+
+(setq-default cursor-type 'bar)
+
+;; Note: (setq-default visual-line-mode t) is somewhat buggy. It did not work
 ;; when org started up sometimes. This might work
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Visual-Line-Mode.html
 (global-visual-line-mode +1)
-;; frame title. Why is :eval needed?
+
+;; frame title like vscode. Why is :eval needed?
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
+
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq-default scroll-margin 1)
+
 ;; Lose the scroll bar, which is only a little useful, but gain the ability to resize vertical
 ;; splits w/ the mouse
 ;; https://stackoverflow.com/a/9646770
@@ -479,7 +484,9 @@ and returns at first non-nil value."
 #+END_SRC
 * Which key
 #+BEGIN_SRC emacs-lisp
-(which-key-mode 1)
+(use-package which-key
+  :config
+  (which-key-mode 1))
 #+END_SRC
 * Tabs
 #+BEGIN_SRC emacs-lisp
@@ -487,29 +494,30 @@ and returns at first non-nil value."
   :demand
   :config
   (centaur-tabs-mode t)
+  (setq centaur-tabs-style "bar")
+  (setq centaur-tabs-height 32)
+  ;; (setq centaur-tabs-set-icons t) ; Unfortunately, icons are very slow on windows...
+  (setq centaur-tabs-set-bar 'over)
+  (setq centaur-tabs-cycle-scope 'tabs)
+  (defun centaur-tabs-buffer-groups ()
+   (list
+    (cond
+     ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+     (t "text"))))
+  ;; I never want to switch to the Emacs buffers anyway.
+  ;; This is naive but at least reduces confusion about multiple groups
+  ;; (defun centaur-tabs-buffer-groups () (list "single-group"))
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-modified-marker "●")
+  ;; https://github.com/ema2159/centaur-tabs/blob/master/centaur-tabs-elements.el
+  (set-face-attribute 'centaur-tabs-selected nil :background "#FDFDFD" :foreground "black")
+  (set-face-attribute 'centaur-tabs-selected-modified nil :background "#FDFDFD" :foreground "black")
+  (set-face-attribute 'centaur-tabs-unselected nil :background "#CCCCCC" :foreground "black")
+  (set-face-attribute 'centaur-tabs-unselected-modified nil :background "#CCCCCC" :foreground "black")
+
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward))
-(setq centaur-tabs-style "bar")
-(setq centaur-tabs-height 32)
-;; (setq centaur-tabs-set-icons t) ; Unfortunately, icons are very slow on windows...
-(setq centaur-tabs-set-bar 'over)
-(setq centaur-tabs-cycle-scope 'tabs)
-(defun centaur-tabs-buffer-groups ()
- (list
-  (cond
-   ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-   (t "text"))))
-;; I never want to switch to the Emacs buffers anyway.
-;; This is naive but at least reduces confusion about multiple groups
-;; (defun centaur-tabs-buffer-groups () (list "single-group"))
-(setq centaur-tabs-set-modified-marker t)
-(setq centaur-tabs-modified-marker "●")
-;; https://github.com/ema2159/centaur-tabs/blob/master/centaur-tabs-elements.el
-(set-face-attribute 'centaur-tabs-selected nil :background "#FDFDFD" :foreground "black")
-(set-face-attribute 'centaur-tabs-selected-modified nil :background "#FDFDFD" :foreground "black")
-(set-face-attribute 'centaur-tabs-unselected nil :background "#CCCCCC" :foreground "black")
-(set-face-attribute 'centaur-tabs-unselected-modified nil :background "#CCCCCC" :foreground "black")
 #+END_SRC
 * Customize
 Do not put customize in this file because it cannot be version controlled.
