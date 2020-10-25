@@ -55,6 +55,13 @@ This command does not push text to `kill-ring'."
 (global-set-key (kbd "<C-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "<C-delete>") 'my-delete-word)
 
+;; change all yes-or-no prompts to y or n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Since I use Dropbox and git heavily, this is probably a good idea
+;; https://magit.vc/manual/magit/Automatic-Reverting-of-File_002dVisiting-Buffers.html
+(global-auto-revert-mode +1)
+
 ;; Make it easier to switch windows
 ;; Why f12 is better than f10: My RH is commonly on the arrow keys, actually.
 ;; So f12 is closer.
