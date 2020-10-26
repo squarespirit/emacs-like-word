@@ -79,7 +79,7 @@ This command does not push text to `kill-ring'."
 (global-unset-key (kbd "<C-end>"))
 
 ;; Pass through win key, so Windows keyboard shortcuts still work
-(setq w32-pass-lwindow-to-system nil)
+(setq w32-pass-lwindow-to-system t)
 #+END_SRC
 ** Undo
 #+BEGIN_SRC emacs-lisp
@@ -548,10 +548,10 @@ No longer needed with expand-region.
 
 ;; Escape quits agenda as expected.
 (define-key org-agenda-mode-map (kbd "<escape>") 'org-agenda-quit)
-(defun org-agenda-cannot-be-saved ()
-  (interactive)
-  (user-error "Org agenda cannot be saved"))
-(define-key org-agenda-mode-map (kbd "C-s") 'org-agenda-cannot-be-saved)
+;; Define familiar keys in agenda
+(define-key org-agenda-mode-map (kbd "C-s") 'org-save-all-org-buffers)
+(define-key org-agenda-mode-map (kbd "C-t") 'org-agenda-todo)
+
 ;; http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/
 ;;warn me of any deadlines in next 7 days
 (setq org-deadline-warning-days 7)
