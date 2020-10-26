@@ -13,12 +13,13 @@
 (defvar file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-;; After Emacs startup has been completed, set `gc-cons-threshold' to
-;; 16 MB and reset `gc-cons-percentage' to its original value.
+;; After Emacs startup has been completed, set `gc-cons-threshold'
+;; and reset `gc-cons-percentage' to its original value.
+;; Allow a generous amount of memory (512 MB)
 ;; Also reset `file-name-handler-alist'
 (add-hook 'emacs-startup-hook
           '(lambda ()
-             (setq gc-cons-threshold (* 16 1024 1024)
+             (setq gc-cons-threshold (* 512 1024 1024)
                    gc-cons-percentage 0.1
                    file-name-handler-alist file-name-handler-alist-original)
              (makunbound 'file-name-handler-alist-original)))
