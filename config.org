@@ -640,5 +640,6 @@ https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
 Do not put customize in this file because it cannot be version controlled.
 #+BEGIN_SRC emacs-lisp
 (setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(if (file-exists-p custom-file)
+   (load-file custom-file))
 #+END_SRC
