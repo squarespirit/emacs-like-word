@@ -568,6 +568,11 @@ No longer needed with expand-region.
 (setq org-agenda-todo-ignore-deadlines 'all)
 (setq org-agenda-todo-ignore-scheduled 'all)
 #+END_SRC
+** Capture
+Capture templates are not set here as they may differ between platforms.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-M-c") 'org-capture)
+#+END_SRC
 * Which key
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
