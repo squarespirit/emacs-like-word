@@ -118,11 +118,11 @@ This command does not push text to `kill-ring'."
 ;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
 #+end_example
 ** Expand region
-#+begin_src emacs_lisp
+#+BEGIN_SRC emacs-lisp
 (use-package expand-region
   :bind (("C-y" . er/expand-region)
          ("C-S-y" . er/contract-region)))
-#+end_src
+#+END_SRC
 ** Scrolling
 #+BEGIN_SRC emacs-lisp
 ;; scroll one line at a time (less "jumpy" than defaults)
