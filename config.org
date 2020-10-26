@@ -23,10 +23,13 @@ However, use-package must first be installed.
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; I think CUA mode really reduces confusion when switching to other apps
 (cua-mode t)
+(setq cua-keep-region-after-copy t)  ;; Like selection in most applications
 ;; Unbind CUA rectangle selection (conflicts with org C-ret)
 (define-key cua-global-keymap (kbd "C-<return>") nil)
 ;; ... but move it to C-M-enter
 (define-key cua-global-keymap (kbd "<C-M-return>") 'cua-rectangle-mark-mode)
+;; TODO: insertion should always occur to the left of the rectangle. I think
+;; inserting to the right is very strange
 
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-S-q") 'save-buffers-kill-terminal)
@@ -497,12 +500,14 @@ and returns at first non-nil value."
 
 ;; org goto - nice way to move around
 (define-key org-mode-map (kbd "C-j") 'org-goto)
-;; Make esc exit.
-;; Would add this function as advice; but org-goto--set-map seems to be
-;; private
-;; (defun add-extra-keys-to-org-goto-map ()
-;;  (define-key org-goto-map (kbd "<escape>") 'org-goto-quit))
-;; (add-function 'org-goto--set-map)
+;; Would really like to make esc exit. However, this doesn't appear to work
+;; Seems to be the most up-to-date source code of org
+;; https://github.com/bzg/org-mode/blob/master/lisp/org-goto.el
+;; (defun add-extra-keys-to-org-goto-map (&rest)
+;;   (message "Adding escape to org goto map")
+;;   (define-key org-goto-map (kbd "<escape>") 'org-goto-quit)
+;;   (message "Value of escape is %s" (lookup-key org-goto-map (kbd "<escape>"))))
+;; (advice-add 'org-goto-location :before #'add-extra-keys-to-org-goto-map)
 ;; And left/right should not exit; that is quite jarring.
 ;; Actually this is maybe not a good idea.
 ;; (defun org-goto-left ()
@@ -634,7 +639,7 @@ https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
   (which-key-mode 1))
 #+END_SRC
 * Tabs
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_EXAMPLE
 (use-package centaur-tabs
   :demand
   :config
@@ -663,7 +668,7 @@ https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward))
-#+END_SRC
+#+END_EXAMPLE
 * Customize
 Do not put customize in this file because it cannot be version controlled.
 #+BEGIN_SRC emacs-lisp
