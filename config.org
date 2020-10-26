@@ -315,42 +315,6 @@ https://oremacs.com/swiper/#getting-started
        (t (original-yank arg)))
     (original-yank arg)))
 
-;; Previous/next heading with smart beginning of line
-
-;; Overcomplicated solution to go to the parent heading. Not used.
-;; Not just outline-up-heading because if you are *not* on a heading
-;; line, it essentially moves up two headings. Only move up one.
-;; (defun my-parent-heading (arg)
-;;   (interactive "p")
-;;   (if (org-at-heading-p)
-;;       (if (equal 1 (funcall outline-level))
-;; 	  (org-previous-visible-heading arg)
-;; 	(outline-up-heading arg))
-;;       (org-previous-visible-heading arg))
-;;   (org-beginning-of-line))
-(defun my-previous-visible-heading (arg)
-  (interactive "p")
-  (org-previous-visible-heading arg)
-  (org-beginning-of-line))
-(define-key org-mode-map (kbd "C-P") 'my-previous-visible-heading)
-(defun my-next-visible-heading (arg)
-  (interactive "p")
-  (org-next-visible-heading arg)
-  (org-beginning-of-line))
-(define-key org-mode-map (kbd "C-N") 'my-next-visible-heading)
-
-(defun my-backward-heading-same-level (arg)
-  (interactive "p")
-  (org-backward-heading-same-level arg)
-  (org-beginning-of-line))
-(define-key org-mode-map (kbd "C-S-P") 'my-backward-heading-same-level)
-(defun my-forward-heading-same-level (arg)
-  (interactive "p")
-  (org-forward-heading-same-level arg)
-  (org-beginning-of-line))
-(define-key org-mode-map (kbd "C-S-N") 'my-forward-heading-same-level)
-
-
 ;; Previous/next paragraph with smart beginning of line
 ;; Unbind C-S-up/down so that shift selection on paragraphs can take place.
 ;; They were org-clock-timestamps-up/down.
@@ -539,6 +503,43 @@ No longer needed with expand-region.
 ;; ;; Y looks like a tree :)
 ;; (define-key org-mode-map (kbd "C-y") 'my-mark-subtree)
 #+end_example
+*** Old go to previous/next heading
+#+begin_example
+;; Previous/next heading with smart beginning of line
+
+;; Overcomplicated solution to go to the parent heading. Not used.
+;; Not just outline-up-heading because if you are *not* on a heading
+;; line, it essentially moves up two headings. Only move up one.
+;; (defun my-parent-heading (arg)
+;;   (interactive "p")
+;;   (if (org-at-heading-p)
+;;       (if (equal 1 (funcall outline-level))
+;; 	  (org-previous-visible-heading arg)
+;; 	(outline-up-heading arg))
+;;       (org-previous-visible-heading arg))
+;;   (org-beginning-of-line))
+;; (defun my-previous-visible-heading (arg)
+;;   (interactive "p")
+;;   (org-previous-visible-heading arg)
+;;   (org-beginning-of-line))
+;; (define-key org-mode-map (kbd "C-P") 'my-previous-visible-heading)
+;; (defun my-next-visible-heading (arg)
+;;   (interactive "p")
+;;   (org-next-visible-heading arg) 
+;;   (org-beginning-of-line))       
+;; (define-key org-mode-map (kbd "C-N") 'my-next-visible-heading)
+;;                                  
+;; (defun my-backward-heading-same-level (arg)
+;;   (interactive "p")              
+;;   (org-backward-heading-same-level arg)
+;;   (org-beginning-of-line))       
+;; (define-key org-mode-map (kbd "C-S-P") 'my-backward-heading-same-level)
+;; (defun my-forward-heading-same-level (arg)
+;;   (interactive "p")              
+;;   (org-forward-heading-same-level arg)
+;;   (org-beginning-of-line))
+;; (define-key org-mode-map (kbd "C-S-N") 'my-forward-heading-same-level)
+#+end_example
 ** Agenda
 #+BEGIN_SRC emacs-lisp
 (require 'org-agenda)
@@ -572,6 +573,22 @@ No longer needed with expand-region.
 Capture templates are not set here as they may differ between platforms.
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-M-c") 'org-capture)
+#+END_SRC
+** Refile
+This is absurdly powerful.N
+https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.html
+https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
+#+BEGIN_SRC emacs-lisp
+;; Possible targets are all agenda files
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+
+(defun +org-search ()
+  (interactive)
+  (org-refile '(4)))
+(define-key org-mode-map (kbd "C-n") '+org-search)
 #+END_SRC
 * Which key
 #+BEGIN_SRC emacs-lisp
