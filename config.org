@@ -145,7 +145,7 @@ This command does not push text to `kill-ring'."
       (setq buflist (cdr buflist)))
 ;;    (message "Buflist is: %S" buflist)
     (if buflist
-	(switch-to-buffer (car buflist)))))
+      (switch-to-buffer (car buflist)))))
 (global-set-key (kbd "<C-tab>") 'switch-to-other-buffer)
 #+end_src
 ** M-x
