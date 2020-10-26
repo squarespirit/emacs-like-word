@@ -99,6 +99,10 @@ This command does not push text to `kill-ring'."
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 (global-set-key (kbd "C-S-w") 'delete-other-windows)
+
+;; Think this makes help more consistent with other things that open windows,
+;; and makes the help easier to quit.
+(setq-default help-window-select t)
 #+END_SRC
 *** Old window switcher
 #+begin_example
