@@ -310,7 +310,27 @@ https://oremacs.com/swiper/#getting-started
 (global-auto-revert-mode +1)
 
 ;; Sessions
-(desktop-save-mode 1)
+;; No longer save desktop, because it is easy to switch projects
+;; (desktop-save-mode 1)
+#+END_SRC
+** Projects
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :demand  ;; Should always be loaded
+  :config
+  (projectile-mode +1)
+  ;; Unbind this so ESC exits the command map
+  (define-key projectile-command-map (kbd "ESC") nil)
+  :bind (:map projectile-mode-map
+         ("C-p" . projectile-command-map)))
+(use-package counsel-projectile
+  :demand
+  :after projectile
+  :config
+  (counsel-projectile-mode +1)
+  :bind (:map projectile-mode-map
+         ("C-S-n" . counsel-projectile)
+         ("C-S-f" . counsel-projectile-rg)))
 #+END_SRC
 * Org
 ** Basic org keybindings
@@ -630,7 +650,7 @@ https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
 (defun +org-search ()
   (interactive)
   (org-refile '(4)))
-(define-key org-mode-map (kbd "C-n") '+org-search)
+;; (define-key org-mode-map (kbd "C-n") '+org-search)
 #+END_SRC
 * Which key
 #+BEGIN_SRC emacs-lisp
