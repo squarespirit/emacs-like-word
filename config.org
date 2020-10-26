@@ -535,6 +535,10 @@ No longer needed with expand-region.
 ** Agenda
 #+BEGIN_SRC emacs-lisp
 (require 'org-agenda)
+;; Easier access to agenda
+(global-set-key (kbd "C-M-a") 'org-agenda)
+
+;; Escape quits agenda as expected.
 (define-key org-agenda-mode-map (kbd "<escape>") 'org-agenda-quit)
 (defun org-agenda-cannot-be-saved ()
   (interactive)
@@ -544,19 +548,18 @@ No longer needed with expand-region.
 ;;warn me of any deadlines in next 7 days
 (setq org-deadline-warning-days 7)
 ;;show me tasks scheduled or due in next fortnight
-(setq org-agenda-span (quote fortnight))
+(setq org-agenda-span 'fortnight)
 ;;don't show tasks as scheduled if they are already shown as a deadline
 ;; (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 ;;don't give awarning colour to tasks with impending deadlines
 ;;if they are scheduled to be done
-(setq org-agenda-skip-deadline-prewarning-if-scheduled (quote pre-scheduled))
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 ;;don't show tasks that are scheduled or have deadlines in the
 ;;normal todo list
 ;; Then, the global todo list becomes a way to check what todos
 ;; are not scheduled
-(setq org-agenda-todo-ignore-deadlines (quote all))
-(setq org-agenda-todo-ignore-scheduled (quote all))
-
+(setq org-agenda-todo-ignore-deadlines 'all)
+(setq org-agenda-todo-ignore-scheduled 'all)
 #+END_SRC
 * Which key
 #+BEGIN_SRC emacs-lisp
