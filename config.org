@@ -117,6 +117,12 @@ This command does not push text to `kill-ring'."
     (select-window new-win)))
 ;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
 #+end_example
+** Expand region
+#+begin_src emacs_lisp
+(use-package expand-region
+  :bind (("C-y" . er/expand-region)
+         ("C-S-y" . er/contract-region)))
+#+end_src
 ** Scrolling
 #+BEGIN_SRC emacs-lisp
 ;; scroll one line at a time (less "jumpy" than defaults)
@@ -299,23 +305,6 @@ https://oremacs.com/swiper/#getting-started
        ((org-kill-is-subtree-p) (org-paste-subtree arg))
        (t (original-yank arg)))
     (original-yank arg)))
-
-;; Great command for subtree editing
-;; Except, while org-mark-subtree puts the point at the beginning of the
-;; selection, put it at the end, which may be more natural for
-;; word processors
-;; No, don't do that anymore. Subtrees can get big; keep the mark on the
-;; heading since it's nice to see the heading of the subtree you selected.
-;; Consecutive calls mark bigger subtrees.
-;; Bug: the subtree is not shift selected, so arrow keys do not cancel
-;; the selection
-(defun my-mark-subtree (&optional up)
-  (interactive "P")
-  (if (eq last-command 'my-mark-subtree)
-      (outline-up-heading 1)) ; move up 1 level
-  (org-mark-subtree up))
-;; Y looks like a tree :)
-(define-key org-mode-map (kbd "C-y") 'my-mark-subtree)
 
 ;; Previous/next heading with smart beginning of line
 
@@ -521,6 +510,26 @@ and returns at first non-nil value."
 (setq-default org-columns-default-format "%50ITEM %TODO %1PRIORITY %20TAGS %20DEADLINE %20SCHEDULED")
 
 #+END_SRC
+*** Old select subtree
+No longer needed with expand-region.
+#+begin_example
+;; Great command for subtree editing
+;; Except, while org-mark-subtree puts the point at the beginning of the
+;; selection, put it at the end, which may be more natural for
+;; word processors
+;; No, don't do that anymore. Subtrees can get big; keep the mark on the
+;; heading since it's nice to see the heading of the subtree you selected.
+;; Consecutive calls mark bigger subtrees.
+;; Bug: the subtree is not shift selected, so arrow keys do not cancel
+;; the selection
+;; (defun my-mark-subtree (&optional up)
+;;   (interactive "P")
+;;   (if (eq last-command 'my-mark-subtree)
+;;       (outline-up-heading 1)) ; move up 1 level
+;;   (org-mark-subtree up))
+;; ;; Y looks like a tree :)
+;; (define-key org-mode-map (kbd "C-y") 'my-mark-subtree)
+#+end_example
 ** Agenda
 #+BEGIN_SRC emacs-lisp
 (require 'org-agenda)
