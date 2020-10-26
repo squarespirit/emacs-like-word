@@ -65,6 +65,9 @@ This command does not push text to `kill-ring'."
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
 
+;; Warning: works ok on real code, doesn't work that well in org mode source blocks
+(global-set-key (kbd "C-/") 'comment-line)
+
 ;; No Ctrl-home/end. I rarely intend to press it, though I often press it accidentally
 (global-unset-key (kbd "<C-home>"))
 (global-unset-key (kbd "<C-end>"))
@@ -79,7 +82,9 @@ This command does not push text to `kill-ring'."
          ("C-S-z" . undo-tree-redo)
          ("C-M-z" . undo-tree-visualize))
   :config
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode 1)
+  ;; Unbind to not conflict with commenting
+  (define-key undo-tree-map (kbd "C-/") nil))
 #+END_SRC
 ** Window management
 #+BEGIN_SRC emacs-lisp
