@@ -72,6 +72,15 @@ This command does not push text to `kill-ring'."
 ;; Pass through win key, so Windows keyboard shortcuts still work
 (setq w32-pass-lwindow-to-system nil)
 #+END_SRC
+** Undo
+#+BEGIN_SRC emacs-lisp
+(use-package undo-tree
+  :bind (("C-z" . undo)
+         ("C-S-z" . undo-tree-redo)
+         ("C-M-z" . undo-tree-visualize))
+  :config
+  (global-undo-tree-mode 1))
+#+END_SRC
 ** Window management
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
