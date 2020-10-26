@@ -204,6 +204,8 @@ https://oremacs.com/swiper/#getting-started
   (setq ivy-count-format "(%d/%d) ")
   ;; Prevent backspace from closing the buffer, a little surprising
   (setq ivy-on-del-error-function nil)
+  ;; Only real buffers
+  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
   :bind (("C-f" . swiper)
          ("C-o" . counsel-find-file)
          ("C-e" . ivy-switch-buffer)))
