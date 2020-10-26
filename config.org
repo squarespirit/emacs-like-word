@@ -201,11 +201,15 @@ https://oremacs.com/swiper/#getting-started
   (setq ivy-count-format "(%d/%d) ")
   ;; Prevent backspace from closing the buffer, a little surprising
   (setq ivy-on-del-error-function nil)
+  ;; Seems pretty important, so that in Ctrl+f, pressing down or up can cycle
+  (setq ivy-wrap t)
   ;; Only real buffers
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
   :bind (("C-f" . swiper)
          ("C-o" . counsel-find-file)
-         ("C-e" . ivy-switch-buffer)))
+         ("C-e" . ivy-switch-buffer)
+         :map ivy-minibuffer-map
+         ("<C-return>" . ivy-immediate-done)))
 #+END_SRC
 * Looks
 #+BEGIN_SRC emacs-lisp
