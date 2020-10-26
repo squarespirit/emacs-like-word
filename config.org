@@ -25,6 +25,8 @@ However, use-package must first be installed.
 (cua-mode t)
 ;; Unbind CUA rectangle selection (conflicts with org C-ret)
 (define-key cua-global-keymap (kbd "C-<return>") nil)
+;; ... but move it to C-M-enter
+(define-key cua-global-keymap (kbd "<C-M-return>") 'cua-rectangle-mark-mode)
 
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-S-q") 'save-buffers-kill-terminal)
