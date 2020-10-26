@@ -241,11 +241,12 @@ https://oremacs.com/swiper/#getting-started
 (scroll-bar-mode -1)
 
 ;; This does not appear to be enough - need smooth scrolling
-;; Docs recommend against setting this and setting scroll-conservatively instead.
-;; (setq scroll-step 1) ;; keyboard scroll one line at a time
+;; Docs for scroll-step recommend against setting this and setting scroll-conservatively instead.
+;; However, this appears to *slow down* scrolling thus making it less jumpy in a good way.
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 ;; I think this needs to be relatively large, otherwise scrolling can happen faster
 ;; than emacs redraws and the cursor can go offscreen, triggering a jump.
-(setq-default scroll-margin 5)
+(setq-default scroll-margin 3)
 (setq auto-window-vscroll nil)
 (setq scroll-conservatively 10000)
 #+END_SRC
