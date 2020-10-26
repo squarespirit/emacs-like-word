@@ -127,6 +127,27 @@ This command does not push text to `kill-ring'."
   :bind (("C-y" . er/expand-region)
          ("C-S-y" . er/contract-region)))
 #+END_SRC
+** Buffers
+#+BEGIN_SRC emacs-lisp
+(defun switch-to-other-buffer ()
+  "Switch to the most recent buffer that is a normal file"
+  (interactive)
+;;  (message "Initial buflist is: %S" (buffer-list (selected-frame)))
+  (let
+      ;; Skip first buffer in buffer-list, which is the current buffer
+      ((buflist (cdr (buffer-list (selected-frame)))))
+    (while
+	(and
+	 buflist
+	 (or
+          (string-prefix-p "*" (buffer-name (car buflist)))
+          (string-prefix-p " *" (buffer-name (car buflist)))))
+      (setq buflist (cdr buflist)))
+;;    (message "Buflist is: %S" buflist)
+    (if buflist
+	(switch-to-buffer (car buflist)))))
+(global-set-key (kbd "<C-tab>") 'switch-to-other-buffer)
+#+end_src
 ** M-x
 Main advantage of smex is that now up/down in M-x will cycle through your most recent commands.
 #+BEGIN_SRC emacs-lisp
@@ -311,6 +332,7 @@ https://oremacs.com/swiper/#getting-started
 ;; Do not override these keys
 (define-key org-mode-map (kbd "C-e") nil)
 (define-key org-mode-map (kbd "C-y") nil)
+(define-key org-mode-map (kbd "<C-tab>") nil)
 
 (require 'org)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
