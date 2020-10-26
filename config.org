@@ -123,6 +123,11 @@ This command does not push text to `kill-ring'."
   :bind (("C-y" . er/expand-region)
          ("C-S-y" . er/contract-region)))
 #+END_SRC
+** M-x
+Main advantage of smex is that now up/down in M-x will cycle through your most recent commands.
+#+BEGIN_SRC emacs-lisp
+(use-package smex)
+#+END_SRC
 ** Old ctrl-f
 #+begin_example
 ;; Use C-f to do searches
