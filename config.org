@@ -23,8 +23,10 @@ However, use-package must first be installed.
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; I think CUA mode really reduces confusion when switching to other apps
 (cua-mode t)
+;; Unbind CUA rectangle selection (conflicts with org C-ret)
+(define-key cua-global-keymap (kbd "C-<return>") nil)
+
 (global-set-key (kbd "C-s") 'save-buffer)
-(global-set-key (kbd "C-w") 'kill-this-buffer)
 (global-set-key (kbd "C-S-q") 'save-buffers-kill-terminal)
 ;; C-o open; complicated stuff to open w/ GUI instead of command line
 ;; https://stackoverflow.com/a/26484229
@@ -58,10 +60,28 @@ This command does not push text to `kill-ring'."
 ;; change all yes-or-no prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Since I use Dropbox and git heavily, this is probably a good idea
-;; https://magit.vc/manual/magit/Automatic-Reverting-of-File_002dVisiting-Buffers.html
-(global-auto-revert-mode +1)
+;; Taken from VScode
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
+;; No overwrite mode
+(global-unset-key (kbd "<insert>"))
 
+;; No Ctrl-home/end. I rarely intend to press it, though I often press it accidentally
+(global-unset-key (kbd "<C-home>"))
+(global-unset-key (kbd "<C-end>"))
+
+;; Pass through win key, so Windows keyboard shortcuts still work
+(setq w32-pass-lwindow-to-system nil)
+#+END_SRC
+** Window management
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :bind (("C-w" . ace-window))
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+(global-set-key (kbd "C-S-w") 'delete-other-windows)
+#+END_SRC
+*** Old window switcher
+#+begin_example
 ;; Make it easier to switch windows
 ;; Why f12 is better than f10: My RH is commonly on the arrow keys, actually.
 ;; So f12 is closer.
@@ -76,21 +96,14 @@ This command does not push text to `kill-ring'."
 	   (split-window-below))))
     (select-window new-win)))
 ;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
-
-;; Taken from VScode
-(global-set-key (kbd "C-S-k") 'kill-whole-line)
-;; No overwrite mode
-(global-unset-key (kbd "<insert>"))
-
+#+end_example
+** Scrolling
+#+BEGIN_SRC emacs-lisp
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; 2 lines at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-;; Pass through win key, so Windows keyboard shortcuts still work
-(setq w32-pass-lwindow-to-system nil)
-;; Unbind CUA rectangle selection (conflicts with org C-ret)
-(define-key cua-global-keymap (kbd "C-<return>") nil)
 #+END_SRC
 ** Old ctrl-f
 #+begin_example
@@ -219,6 +232,10 @@ https://oremacs.com/swiper/#getting-started
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (set-face-attribute 'default nil :font "Consolas" :height 120))
  (t (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 120)))
+
+;; Since I use Dropbox and git heavily, this is probably a good idea
+;; https://magit.vc/manual/magit/Automatic-Reverting-of-File_002dVisiting-Buffers.html
+(global-auto-revert-mode +1)
 
 ;; Sessions
 (desktop-save-mode 1)
