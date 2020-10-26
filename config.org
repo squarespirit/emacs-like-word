@@ -67,6 +67,10 @@ This command does not push text to `kill-ring'."
 ;; No overwrite mode
 (global-unset-key (kbd "<insert>"))
 
+;; Easier goto line
+;; Note: C-g cannot be bound since it is used for cancel.
+(global-set-key (kbd "M-g") 'goto-line)
+
 ;; Warning: works ok on real code, doesn't work that well in org mode source blocks
 (global-set-key (kbd "C-/") 'comment-line)
 
