@@ -307,8 +307,10 @@ https://oremacs.com/swiper/#getting-started
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (setq-default org-special-ctrl-a/e t)
-;; Do not override global C-e
+
+;; Do not override these keys
 (define-key org-mode-map (kbd "C-e") nil)
+(define-key org-mode-map (kbd "C-y") nil)
 
 (require 'org)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
