@@ -21,13 +21,13 @@ However, use-package must first be installed.
 ;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;; https://stackoverflow.com/a/650386
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; Rebind CUA rectangle selection (conflicts with org C-ret)
+;; Needs to happen before turning on cua mode
+(setq cua-rectangle-mark-key (kbd "<C-M-return>"))
 ;; I think CUA mode really reduces confusion when switching to other apps
 (cua-mode t)
 (setq cua-keep-region-after-copy t)  ;; Like selection in most applications
-;; Unbind CUA rectangle selection (conflicts with org C-ret)
-(define-key cua-global-keymap (kbd "C-<return>") nil)
-;; ... but move it to C-M-enter
-(define-key cua-global-keymap (kbd "<C-M-return>") 'cua-rectangle-mark-mode)
 ;; TODO: insertion should always occur to the left of the rectangle. I think
 ;; inserting to the right is very strange
 
