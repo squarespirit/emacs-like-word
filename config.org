@@ -243,10 +243,12 @@ https://oremacs.com/swiper/#getting-started
   (setq ivy-wrap t)
   ;; Only real buffers
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
-  :bind (("C-f" . swiper)
+  :bind (("C-d" . swiper-isearch-thing-at-point)
+         ("C-f" . swiper-isearch)
          ("C-o" . counsel-find-file)
          ("C-e" . ivy-switch-buffer)
          :map ivy-minibuffer-map
+         ("C-d" . ivy-yank-symbol)
          ("<C-return>" . ivy-immediate-done)))
 #+END_SRC
 * Looks
