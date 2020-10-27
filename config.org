@@ -110,60 +110,12 @@ This command does not push text to `kill-ring'."
 
 (define-key help-mode-map (kbd "<escape>") 'quit-window)
 #+end_src
-** Window management
-#+BEGIN_SRC emacs-lisp
-(use-package ace-window
-  :bind (("C-w" . ace-window))
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
-(global-set-key (kbd "C-S-w") 'delete-other-windows)
-(use-package transpose-frame
-  :bind (("M-w" . rotate-frame-clockwise)))
-#+END_SRC
-*** Old window switcher
-#+begin_example
-;; Make it easier to switch windows
-;; Why f12 is better than f10: My RH is commonly on the arrow keys, actually.
-;; So f12 is closer.
-(global-set-key (kbd "<f12>") 'other-window)
-(global-set-key (kbd "<S-f12>") 'delete-other-windows)
-(global-set-key (kbd "<M-f12>") 'delete-window)
-(defun ergo-split-window ()
-  (interactive)
-  (let ((new-win
-	 (if (> (window-width) 160)
-	     (split-window-right)
-	   (split-window-below))))
-    (select-window new-win)))
-;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
-#+end_example
 ** Expand region
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
   :bind (("C-y" . er/expand-region)
          ("C-S-y" . er/contract-region)))
 #+END_SRC
-** Buffers
-#+BEGIN_SRC emacs-lisp
-(defun switch-to-other-buffer ()
-  "Switch to the most recent buffer that is a normal file"
-  (interactive)
-;;  (message "Initial buflist is: %S" (buffer-list (selected-frame)))
-  (let
-      ;; Skip first buffer in buffer-list, which is the current buffer
-      ((buflist (cdr (buffer-list (selected-frame)))))
-    (while
-	(and
-	 buflist
-	 (or
-          (string-prefix-p "*" (buffer-name (car buflist)))
-          (string-prefix-p " *" (buffer-name (car buflist)))))
-      (setq buflist (cdr buflist)))
-;;    (message "Buflist is: %S" buflist)
-    (if buflist
-      (switch-to-buffer (car buflist)))))
-(global-set-key (kbd "<C-tab>") 'switch-to-other-buffer)
-#+end_src
 ** M-x
 Main advantage of smex is that now up/down in M-x will cycle through your most recent commands.
 #+BEGIN_SRC emacs-lisp
@@ -231,6 +183,54 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 (ido-mode +1)
 (global-set-key (kbd "C-e") 'ido-switch-buffer)
 #+end_example
+* Window management
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :bind (("C-w" . ace-window))
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+(global-set-key (kbd "C-S-w") 'delete-other-windows)
+(use-package transpose-frame
+  :bind (("M-w" . rotate-frame-clockwise)))
+#+END_SRC
+** Old window switcher
+#+begin_example
+;; Make it easier to switch windows
+;; Why f12 is better than f10: My RH is commonly on the arrow keys, actually.
+;; So f12 is closer.
+(global-set-key (kbd "<f12>") 'other-window)
+(global-set-key (kbd "<S-f12>") 'delete-other-windows)
+(global-set-key (kbd "<M-f12>") 'delete-window)
+(defun ergo-split-window ()
+  (interactive)
+  (let ((new-win
+	 (if (> (window-width) 160)
+	     (split-window-right)
+	   (split-window-below))))
+    (select-window new-win)))
+;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
+#+end_example
+* Buffers
+#+BEGIN_SRC emacs-lisp
+(defun switch-to-other-buffer ()
+  "Switch to the most recent buffer that is a normal file"
+  (interactive)
+;;  (message "Initial buflist is: %S" (buffer-list (selected-frame)))
+  (let
+      ;; Skip first buffer in buffer-list, which is the current buffer
+      ((buflist (cdr (buffer-list (selected-frame)))))
+    (while
+	(and
+	 buflist
+	 (or
+          (string-prefix-p "*" (buffer-name (car buflist)))
+          (string-prefix-p " *" (buffer-name (car buflist)))))
+      (setq buflist (cdr buflist)))
+;;    (message "Buflist is: %S" buflist)
+    (if buflist
+      (switch-to-buffer (car buflist)))))
+(global-set-key (kbd "<C-tab>") 'switch-to-other-buffer)
+#+end_src
 * Ivy/counsel
 https://oremacs.com/swiper/#getting-started
 #+BEGIN_SRC emacs-lisp
