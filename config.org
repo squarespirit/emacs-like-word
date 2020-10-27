@@ -32,6 +32,7 @@ However, use-package must first be installed.
 ;; inserting to the right is very strange
 
 (global-set-key (kbd "C-s") 'save-buffer)
+(global-set-key (kbd "C-S-s") 'write-file)
 (global-set-key (kbd "C-S-q") 'save-buffers-kill-terminal)
 ;; C-o open; complicated stuff to open w/ GUI instead of command line
 ;; https://stackoverflow.com/a/26484229
