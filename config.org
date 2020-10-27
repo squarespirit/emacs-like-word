@@ -249,6 +249,7 @@ https://oremacs.com/swiper/#getting-started
          ("C-e" . ivy-switch-buffer)
          :map ivy-minibuffer-map
          ("C-d" . ivy-yank-symbol)
+         ("<S-return>" . ivy-call)
          ("<C-return>" . ivy-immediate-done)))
 #+END_SRC
 * Looks
