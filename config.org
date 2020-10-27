@@ -96,6 +96,12 @@ This command does not push text to `kill-ring'."
   ;; Unbind to not conflict with commenting
   (define-key undo-tree-map (kbd "C-/") nil))
 #+END_SRC
+** Parens
+#+BEGIN_SRC emacs-lisp
+(use-package smartparens
+  :config
+  (smartparens-global-mode 1))
+#+end_src
 ** Window management
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
@@ -269,6 +275,7 @@ https://oremacs.com/swiper/#getting-started
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
 #+END_SRC
 ** Scrolling
+
 #+BEGIN_SRC emacs-lisp
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
