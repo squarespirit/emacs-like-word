@@ -365,6 +365,9 @@ https://oremacs.com/swiper/#getting-started
 
 (setq-default org-special-ctrl-a/e t)
 
+;; Mouse support
+(require 'org-mouse)
+
 ;; Do not override these keys
 (define-key org-mode-map (kbd "C-e") nil)
 (define-key org-mode-map (kbd "C-y") nil)
