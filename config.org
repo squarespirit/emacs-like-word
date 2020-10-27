@@ -291,6 +291,14 @@ https://oremacs.com/swiper/#getting-started
 (setq auto-window-vscroll nil)
 (setq scroll-conservatively 10000)
 #+END_SRC
+** Modeline
+;; Looks nice and has few dependencies.
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline
+  :config
+  (require 'spaceline-config)
+  (spaceline-emacs-theme))
+#+END_SRC
 * Files and sessions
 #+BEGIN_SRC emacs-lisp
 ;; https://www.johndcook.com/blog/emacs_windows/
