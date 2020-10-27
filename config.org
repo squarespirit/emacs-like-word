@@ -223,6 +223,8 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 https://oremacs.com/swiper/#getting-started
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
+  ;; It appears that without this demand, projectile isn't loaded on demand
+  :demand
   :config
   (ivy-mode 1)
   (counsel-mode 1)
@@ -311,27 +313,21 @@ https://oremacs.com/swiper/#getting-started
 (global-auto-revert-mode +1)
 
 ;; Sessions
-;; No longer save desktop, because it is easy to switch projects
-;; (desktop-save-mode 1)
+(desktop-save-mode 1)
 #+END_SRC
 ** Projects
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :demand  ;; Should always be loaded
+  :after ivy
   :config
+  (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
   ;; Unbind this so ESC exits the command map
   (define-key projectile-command-map (kbd "ESC") nil)
-  :bind (:map projectile-mode-map
-         ("C-p" . projectile-command-map)))
-(use-package counsel-projectile
-  :demand
-  :after projectile
-  :config
-  (counsel-projectile-mode +1)
-  :bind (:map projectile-mode-map
-         ("C-S-n" . counsel-projectile)
-         ("C-S-f" . counsel-projectile-rg)))
+  :bind-keymap (("C-p" . projectile-command-map))
+  :bind (("C-S-f" . projectile-ripgrep)
+         ("C-n" . projectile-find-file)))
 #+END_SRC
 * Org
 ** Basic org keybindings
