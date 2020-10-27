@@ -348,14 +348,6 @@ https://oremacs.com/swiper/#getting-started
 ;; Support shift-selection almost always...except editing timestamps
 (setq-default org-support-shift-select 'always)
 
-;; Looks
-(setq-default org-startup-indented t)
-;; More natural ellipsis
-(setq org-ellipsis "⤵")
-(use-package org-bullets
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
 (setq-default org-special-ctrl-a/e t)
 
 ;; Do not override these keys
@@ -608,6 +600,18 @@ No longer needed with expand-region.
 ;;   (org-beginning-of-line))
 ;; (define-key org-mode-map (kbd "C-S-N") 'my-forward-heading-same-level)
 #+end_example
+** Org looks
+#+BEGIN_SRC emacs-lisp
+(setq-default
+  org-startup-indented t
+  org-startup-folded 'content
+  org-startup-with-inline-images t)
+;; More natural ellipsis
+(setq org-ellipsis "⤵")
+(use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
 ** Agenda
 #+BEGIN_SRC emacs-lisp
 (require 'org-agenda)
