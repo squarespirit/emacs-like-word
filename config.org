@@ -95,6 +95,7 @@ This command does not push text to `kill-ring'."
 #+END_SRC
 ** Mark ring
 #+begin_src emacs-lisp
+;; https://stackoverflow.com/a/14539202
 (defun unpop-to-mark-command ()
   "Unpop off mark ring. Does nothing if mark ring is empty."
   (interactive)
@@ -105,9 +106,10 @@ This command does not push text to `kill-ring'."
         (setq mark-ring (nbutlast mark-ring))
         (goto-char (marker-position (car (last mark-ring))))))
 (defun pop-and-jump-to-mark ()
+  "Go to previous mark position."
   (interactive)
   (cua-set-mark '(4)))
-;; Note: usual keys (alt-left/right) do not work because
+;; Note: usual keys (alt-left/right) can't be bound because
 ;; org mode uses them
 (global-set-key (kbd "M--") 'pop-and-jump-to-mark)
 (global-set-key (kbd "M-=") 'unpop-to-mark-command)
