@@ -241,6 +241,13 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 (setq pc-bufsw-decorator-right (propertize ">" 'face 'bold))
 (setq pc-bufsw-selected-buffer-face 'bold)
 #+end_src
+** Ctrl-e switcher
+Use ivy-rich to print more info
+#+begin_src emacs-lisp
+(use-package ivy-rich
+  :config
+  (ivy-rich-mode 1))
+#+end_src
 * Ivy/counsel
 https://oremacs.com/swiper/#getting-started
 #+BEGIN_SRC emacs-lisp
