@@ -354,7 +354,7 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
 #+BEGIN_SRC emacs-lisp
 (load-file "~/.emacs.d/pc-bufsw.el")
 ;; Unbind some strange key combos including M-[
-(setq pc-bufsw-keys '(([C-tab]) ([C-S-tab])))
+(setq pc-bufsw-keys '(([C-tab]) ([C-S-tab] [C-S-iso-lefttab])))
 (pc-bufsw +1)
 ;; More prominent selected buffer
 (setq pc-bufsw-decorator-left (propertize "<" 'face 'bold))
