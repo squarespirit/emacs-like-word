@@ -93,6 +93,25 @@ This command does not push text to `kill-ring'."
 ;; Let shift-click extend selection
 (global-set-key (kbd "<S-down-mouse-1>") 'mouse-save-then-kill)
 #+END_SRC
+** Mark ring
+#+begin_src emacs-lisp
+(defun unpop-to-mark-command ()
+  "Unpop off mark ring. Does nothing if mark ring is empty."
+  (interactive)
+      (when mark-ring
+        (setq mark-ring (cons (copy-marker (mark-marker)) mark-ring))
+        (set-marker (mark-marker) (car (last mark-ring)) (current-buffer))
+        (when (null (mark t)) (ding))
+        (setq mark-ring (nbutlast mark-ring))
+        (goto-char (marker-position (car (last mark-ring))))))
+(defun pop-and-jump-to-mark ()
+  (interactive)
+  (cua-set-mark '(4)))
+;; Note: usual keys (alt-left/right) do not work because
+;; org mode uses them
+(global-set-key (kbd "M--") 'pop-and-jump-to-mark)
+(global-set-key (kbd "M-=") 'unpop-to-mark-command)
+#+end_src
 ** Undo
 #+BEGIN_SRC emacs-lisp
 (use-package undo-tree
