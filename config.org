@@ -211,6 +211,37 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 ;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
 #+end_example
 * Buffers
+** Tabs
+#+BEGIN_EXAMPLE
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-style "bar")
+  (setq centaur-tabs-height 32)
+  ;; (setq centaur-tabs-set-icons t) ; Unfortunately, icons are very slow on windows...
+  (setq centaur-tabs-set-bar 'over)
+  (setq centaur-tabs-cycle-scope 'tabs)
+  (defun centaur-tabs-buffer-groups ()
+   (list
+    (cond
+     ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+     (t "text"))))
+  ;; I never want to switch to the Emacs buffers anyway.
+  ;; This is naive but at least reduces confusion about multiple groups
+  ;; (defun centaur-tabs-buffer-groups () (list "single-group"))
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-modified-marker "●")
+  ;; https://github.com/ema2159/centaur-tabs/blob/master/centaur-tabs-elements.el
+  (set-face-attribute 'centaur-tabs-selected nil :background "#FDFDFD" :foreground "black")
+  (set-face-attribute 'centaur-tabs-selected-modified nil :background "#FDFDFD" :foreground "black")
+  (set-face-attribute 'centaur-tabs-unselected nil :background "#CCCCCC" :foreground "black")
+  (set-face-attribute 'centaur-tabs-unselected-modified nil :background "#CCCCCC" :foreground "black")
+
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+#+END_EXAMPLE
 ** Old ctrl-tab buffer switcher
 #+begin_example
 (defun switch-to-other-buffer ()
@@ -728,37 +759,6 @@ https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
   :config
   (which-key-mode 1))
 #+END_SRC
-* Tabs
-#+BEGIN_EXAMPLE
-(use-package centaur-tabs
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-style "bar")
-  (setq centaur-tabs-height 32)
-  ;; (setq centaur-tabs-set-icons t) ; Unfortunately, icons are very slow on windows...
-  (setq centaur-tabs-set-bar 'over)
-  (setq centaur-tabs-cycle-scope 'tabs)
-  (defun centaur-tabs-buffer-groups ()
-   (list
-    (cond
-     ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-     (t "text"))))
-  ;; I never want to switch to the Emacs buffers anyway.
-  ;; This is naive but at least reduces confusion about multiple groups
-  ;; (defun centaur-tabs-buffer-groups () (list "single-group"))
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-modified-marker "●")
-  ;; https://github.com/ema2159/centaur-tabs/blob/master/centaur-tabs-elements.el
-  (set-face-attribute 'centaur-tabs-selected nil :background "#FDFDFD" :foreground "black")
-  (set-face-attribute 'centaur-tabs-selected-modified nil :background "#FDFDFD" :foreground "black")
-  (set-face-attribute 'centaur-tabs-unselected nil :background "#CCCCCC" :foreground "black")
-  (set-face-attribute 'centaur-tabs-unselected-modified nil :background "#CCCCCC" :foreground "black")
-
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward))
-#+END_EXAMPLE
 * Customize
 Do not put customize in this file because it cannot be version controlled.
 #+BEGIN_SRC emacs-lisp
