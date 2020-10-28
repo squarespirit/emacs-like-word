@@ -211,7 +211,8 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 ;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
 #+end_example
 * Buffers
-#+BEGIN_SRC emacs-lisp
+** Old ctrl-tab buffer switcher
+#+begin_example
 (defun switch-to-other-buffer ()
   "Switch to the most recent buffer that is a normal file"
   (interactive)
@@ -230,6 +231,15 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
     (if buflist
       (switch-to-buffer (car buflist)))))
 (global-set-key (kbd "<C-tab>") 'switch-to-other-buffer)
+#+end_example
+** Ctrl-tab switcher
+#+BEGIN_SRC emacs-lisp
+(load-file "~/.emacs.d/pc-bufsw.el")
+(pc-bufsw +1)
+;; More prominent selected buffer
+(setq pc-bufsw-decorator-left (propertize "<" 'face 'bold))
+(setq pc-bufsw-decorator-right (propertize ">" 'face 'bold))
+(setq pc-bufsw-selected-buffer-face 'bold)
 #+end_src
 * Ivy/counsel
 https://oremacs.com/swiper/#getting-started
