@@ -123,6 +123,15 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 #+BEGIN_SRC emacs-lisp
 (use-package smex)
 #+END_SRC
+** Completion
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :demand
+  :config
+  (company-mode 1)
+  ;; C-spc is more normal, but rebinding that is almost unthinkable...
+  :bind (("M-SPC" . company-complete)))
+#+end_src
 ** Old ctrl-f
 #+begin_example
 ;; Use C-f to do searches
