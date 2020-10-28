@@ -269,6 +269,7 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
    ("^\\*[e]shell"
     (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-below-selected)
     (window-min-height . 20)
+    (window-height . 0.35)
     (reusable-frames . visible)
     )
    )
@@ -356,6 +357,16 @@ Use ivy-rich to print more info
 		    :predicate
 		    (lambda (cand) (get-buffer cand)))))
   (ivy-rich-mode 1))
+#+end_src
+* Terminal
+#+begin_src emacs-lisp
+(defun switch-to-eshell ()
+  "Switch to eshell, or hide it if you are already inside eshell."
+  (interactive)
+  (if (eq major-mode 'eshell-mode)
+      (delete-window)
+    (eshell)))
+(global-set-key (kbd "C-`") 'switch-to-eshell)
 #+end_src
 * Ivy/counsel
 https://oremacs.com/swiper/#getting-started
