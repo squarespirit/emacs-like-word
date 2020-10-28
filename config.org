@@ -561,6 +561,12 @@ Use ivy-rich to print more info
        ((org-kill-is-subtree-p) (org-paste-subtree arg))
        (t (original-yank arg)))
     (original-yank arg)))
+;; TODO: cleaner definition.
+;; C-v: temporarily redefines `yank` then calls cua-paste.
+;; C-S-v: calls normal cua-paste.
+;; There may be a better way:
+;; - UNBIND C-v from cua-mode. Set it in global keymap instead.
+;; - In org mode map, set C-v to smart paste, C-S-v to normal paste.
 
 ;; Previous/next paragraph with smart beginning of line
 ;; Unbind C-S-up/down so that shift selection on paragraphs can take place.
