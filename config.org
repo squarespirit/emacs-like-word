@@ -179,25 +179,33 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 ;;
 (setq-default isearch-nonincremental t)
 #+end_example
-** Old buffer switcher
-#+begin_example
-;; Buffer switcher
-;; (require 'bs)
-;; (add-to-list 'bs-configurations
-;;              '("targets" nil nil nil
-;; 	       (lambda (buf)
-;; 		 ((not (string-equal "*" (substring (buffer-name buf) 0 1)))
-;; 		  "Normal"))))
-;; (defun bs-show-and-goto-alternate (arg)
-;;   (interactive "P")
-;;   (bs-show arg)
-;;   (forward-line))
-;; (global-set-key (kbd "C-e") 'bs-show-and-goto-alternate)
-;; (define-key bs-mode-map (kbd "<escape>") 'bs-abort)
-;; A better buffer switcher, with auto isearch
-(ido-mode +1)
-(global-set-key (kbd "C-e") 'ido-switch-buffer)
-#+end_example
+* Ivy/counsel
+https://oremacs.com/swiper/#getting-started
+Ivy is quite important, so load it early.
+#+BEGIN_SRC emacs-lisp
+(use-package counsel
+  ;; It appears that without this demand, projectile isn't loaded on demand
+  :demand
+  :config
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  ;; Prevent backspace from closing the buffer, a little surprising
+  (setq ivy-on-del-error-function nil)
+  ;; Seems pretty important, so that in Ctrl+f, pressing down or up can cycle
+  (setq ivy-wrap t)
+  ;; Only real buffers
+  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
+  :bind (("C-d" . swiper-isearch-thing-at-point)
+         ("C-f" . swiper-isearch)
+         ("C-o" . counsel-find-file)
+         ("C-e" . ivy-switch-buffer)
+         :map ivy-minibuffer-map
+         ("C-d" . ivy-yank-symbol)
+         ("<S-return>" . ivy-call)
+         ("<C-return>" . ivy-immediate-done)))
+#+END_SRC
 * Window management
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
@@ -368,6 +376,25 @@ Use ivy-rich to print more info
 		    (lambda (cand) (get-buffer cand)))))
   (ivy-rich-mode 1))
 #+end_src
+** Old buffer switcher
+#+begin_example
+;; Buffer switcher
+;; (require 'bs)
+;; (add-to-list 'bs-configurations
+;;              '("targets" nil nil nil
+;; 	       (lambda (buf)
+;; 		 ((not (string-equal "*" (substring (buffer-name buf) 0 1)))
+;; 		  "Normal"))))
+;; (defun bs-show-and-goto-alternate (arg)
+;;   (interactive "P")
+;;   (bs-show arg)
+;;   (forward-line))
+;; (global-set-key (kbd "C-e") 'bs-show-and-goto-alternate)
+;; (define-key bs-mode-map (kbd "<escape>") 'bs-abort)
+;; A better buffer switcher, with auto isearch
+(ido-mode +1)
+(global-set-key (kbd "C-e") 'ido-switch-buffer)
+#+end_example
 * Terminal
 #+begin_src emacs-lisp
 (defun switch-to-eshell ()
@@ -378,32 +405,6 @@ Use ivy-rich to print more info
     (eshell)))
 (global-set-key (kbd "C-`") 'switch-to-eshell)
 #+end_src
-* Ivy/counsel
-https://oremacs.com/swiper/#getting-started
-#+BEGIN_SRC emacs-lisp
-(use-package counsel
-  ;; It appears that without this demand, projectile isn't loaded on demand
-  :demand
-  :config
-  (ivy-mode 1)
-  (counsel-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  ;; Prevent backspace from closing the buffer, a little surprising
-  (setq ivy-on-del-error-function nil)
-  ;; Seems pretty important, so that in Ctrl+f, pressing down or up can cycle
-  (setq ivy-wrap t)
-  ;; Only real buffers
-  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
-  :bind (("C-d" . swiper-isearch-thing-at-point)
-         ("C-f" . swiper-isearch)
-         ("C-o" . counsel-find-file)
-         ("C-e" . ivy-switch-buffer)
-         :map ivy-minibuffer-map
-         ("C-d" . ivy-yank-symbol)
-         ("<S-return>" . ivy-call)
-         ("<C-return>" . ivy-immediate-done)))
-#+END_SRC
 * Looks
 #+BEGIN_SRC emacs-lisp
 ;; Solarized theme https://github.com/bbatsov/solarized-emacs
@@ -434,7 +435,6 @@ https://oremacs.com/swiper/#getting-started
 (setq inhibit-compacting-font-caches t)
 #+END_SRC
 ** Scrolling
-
 #+BEGIN_SRC emacs-lisp
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; https://www.emacswiki.org/emacs/SmoothScrolling
@@ -511,7 +511,7 @@ https://oremacs.com/swiper/#getting-started
   ;; Cannot be bound with :bind because it's my own function defined outside the pkg
   (global-set-key (kbd "C-'") 'my-treemacs-back-and-forth))
 #+end_src
-** Projects
+* Projects
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :demand  ;; Should always be loaded
@@ -535,8 +535,6 @@ https://oremacs.com/swiper/#getting-started
 ;; Support shift-selection almost always...except editing timestamps
 (setq-default org-support-shift-select 'always)
 
-(setq-default org-special-ctrl-a/e t)
-
 ;; Mouse support
 (require 'org-mouse)
 
@@ -546,7 +544,7 @@ https://oremacs.com/swiper/#getting-started
 (define-key org-mode-map (kbd "<C-tab>") nil)
 (define-key org-mode-map (kbd "C-'") nil)
 
-(require 'org)
+(setq-default org-special-ctrl-a/e t)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
 
