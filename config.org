@@ -341,6 +341,10 @@ https://oremacs.com/swiper/#getting-started
 
 ;; frame title like vscode. Why is :eval needed?
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
+
+;; Makes icons faster on windows
+;; https://github.com/domtronn/all-the-icons.el/issues/28#issuecomment-312089198
+(setq inhibit-compacting-font-caches t)
 #+END_SRC
 ** Scrolling
 
