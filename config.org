@@ -233,6 +233,47 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
     (select-window new-win)))
 ;; (global-set-key (kbd "<C-f12>") 'ergo-split-window)
 #+end_example
+** Display alist
+http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
+#+begin_src emacs-lisp
+(setq
+ ;; Kill a frame when quitting its only window
+ frame-auto-hide-function 'delete-frame
+ ;; Maximum number of side-windows to create on (left top right bottom)
+ window-sides-slots '(1 1 1 1)
+ ;; Default rules
+ display-buffer-alist
+ `(;; Display *Help* buffer at the bottom-most slot
+   ("*\\(Help\\|trace-\\|Backtrace\\|RefTeX.*\\)"
+    (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 0)
+    (window-width . 0.33)
+    (reusable-frames . visible))
+   ("^\\*info"
+    (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-pop-up-frame)
+    (pop-up-frame-parameters
+      (width . 80)
+      (left . 1.0)
+      (fullscreen . fullheight)))
+   ;; Open new edited messages in a right-hand frame
+   ;; For this to close the frame, add
+   ;; (add-hook 'wl-draft-kill-pre-hook 'quit-window)
+   ("\\(\\*draft\\*\\|Draft/\\)"
+    (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-pop-up-frame)
+    (pop-up-frame-parameters
+      (width . 80)
+      (left . 1.0)
+      (fullscreen . fullheight)))
+   ;; Split shells at the bottom
+   ("^\\*[e]shell"
+    (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-below-selected)
+    (window-min-height . 20)
+    (reusable-frames . visible)
+    )
+   )
+ )
+#+end_src
 * Buffers
 ** Tabs
 #+BEGIN_EXAMPLE
