@@ -88,6 +88,10 @@ This command does not push text to `kill-ring'."
 
 ;; Pass through win key, so Windows keyboard shortcuts still work
 (setq w32-pass-lwindow-to-system t)
+
+;; Mouse
+;; Let shift-click extend selection
+(global-set-key (kbd "<S-down-mouse-1>") 'mouse-save-then-kill)
 #+END_SRC
 ** Undo
 #+BEGIN_SRC emacs-lisp
