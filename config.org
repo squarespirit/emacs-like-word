@@ -191,7 +191,19 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 (global-set-key (kbd "C-S-w") 'delete-other-windows)
 (use-package transpose-frame
-  :bind (("M-w" . rotate-frame-clockwise)))
+  :config
+  (defun my-rotate-frame-clockwise-with-treemacs ()
+    "Rotate windows clockwise, properly showing/hiding treemacs because it interferes."
+    (interactive)
+    (if (eq (treemacs-current-visibility) 'visible)
+	(progn
+	  (treemacs)
+	  (rotate-frame-clockwise)
+	  (treemacs)
+          ;; Hack because at this point, the treemacs window is selected. Probably not desired
+        (other-window 1))
+      (rotate-frame-clockwise)))
+  (global-set-key (kbd "M-w") 'my-rotate-frame-clockwise-with-treemacs))
 #+END_SRC
 ** Old window switcher
 #+begin_example
