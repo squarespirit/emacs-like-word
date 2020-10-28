@@ -481,7 +481,7 @@ https://oremacs.com/swiper/#getting-started
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (set-face-attribute 'default nil :font "Consolas" :height 120))
- (t (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 120)))
+ (t (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 110)))
 
 ;; Since I use Dropbox and git heavily, this is probably a good idea
 ;; https://magit.vc/manual/magit/Automatic-Reverting-of-File_002dVisiting-Buffers.html
