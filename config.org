@@ -125,11 +125,12 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 #+END_SRC
 ** Completion
 #+BEGIN_SRC emacs-lisp
+;; Sacrilege! I have rebound the mark command
+(global-set-key (kbd "M-SPC") 'cua-set-mark)
 (use-package company
   :demand
   :hook (after-init-hook . global-company-mode)
-  ;; C-spc is more normal, but rebinding that is almost unthinkable...
-  :bind (("M-SPC" . company-complete)))
+  :bind (("C-SPC" . company-complete)))
 #+end_src
 ** Old ctrl-f
 #+begin_example
