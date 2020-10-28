@@ -155,7 +155,6 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 ;; Sacrilege! I have rebound the mark command
 (global-set-key (kbd "M-SPC") 'cua-set-mark)
 (use-package company
-  :demand
   :hook (after-init-hook . global-company-mode)
   :bind (("C-SPC" . company-complete)))
 #+end_src
