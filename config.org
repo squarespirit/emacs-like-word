@@ -248,7 +248,7 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
     (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-in-side-window)
     (side . bottom)
     (slot . 0)
-    (window-width . 0.33)
+    (window-height . 0.33)
     (reusable-frames . visible))
    ("^\\*info"
     (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-pop-up-frame)
@@ -265,6 +265,12 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
       (width . 80)
       (left . 1.0)
       (fullscreen . fullheight)))
+   ("^\\*Org todo"
+    (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 0)
+    (window-height . 1)
+    (reusable-frames . visible))
    ;; Split shells at the bottom
    ("^\\*[e]shell"
     (display-buffer-reuse-window display-buffer-in-previous-window display-buffer-below-selected)
