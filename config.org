@@ -621,6 +621,17 @@ Use ivy-rich to print more info
 ;;   (unless mark-active
 ;;     (org-beginning-of-line)))
 ;; (define-key org-mode-map (kbd "<C-down>") 'my-forward-paragraph)
+;; Enable shift-selection on org paragraph
+(defun mw-org-backward-paragraph ()
+  (interactive "^")
+  "Go backward to previous paragraph; allow for shift selection"
+  (org-backward-paragraph))
+(define-key org-mode-map (kbd "<C-up>") 'mw-org-backward-paragraph)
+(defun mw-org-forward-paragraph ()
+  (interactive "^")
+  "Go forward to next paragraph; allow for shift selection"
+  (org-forward-paragraph))
+(define-key org-mode-map (kbd "<C-down>") 'mw-org-forward-paragraph)
 
 ;; Swap M-left/right and S-M-left/right, so that all the unshifted
 ;; M-<arrow keys> work on subtrees.
