@@ -15,14 +15,17 @@
 
 ;; After Emacs startup has been completed, set `gc-cons-threshold'
 ;; and reset `gc-cons-percentage' to its original value.
-;; Allow a generous amount of memory (512 MB)
 ;; Also reset `file-name-handler-alist'
 (add-hook 'emacs-startup-hook
           '(lambda ()
-             (setq gc-cons-threshold (* 512 1024 1024)
+	     ;; 1mb
+             (setq gc-cons-threshold (* 1024 1024)
                    gc-cons-percentage 0.1
                    file-name-handler-alist file-name-handler-alist-original)
              (makunbound 'file-name-handler-alist-original)))
+
+;; Verbose gc
+(setq garbage-collection-messages t)
 
 ;; Garbage collect on focus lost - Emacs "should" feel snappier
 ;; https://github.com/Bassmann/emacs-config/blob/master/emacs.org#garbage-collect-on-focus-out-emacs-should-feel-snappier
