@@ -26,6 +26,12 @@ However, use-package must first be installed.
 ;; Issues with binding to -quit: ESC can't exit minibuffer and many
 ;; other things
 
+;; Rebind CUA rectangle selection (conflicts with org C-ret)
+;; Needs to happen before turning on cua mode
+(setq cua-rectangle-mark-key (kbd "<C-M-return>"))
+;; I don't live in emacs yet...
+(cua-mode t)
+
 ;; Rebind some stuff that causes me pain
 (require 'bind-key)
 (bind-keys
@@ -35,11 +41,34 @@ However, use-package must first be installed.
 ;; Rebind to rectangle commands
 (bind-key "M-r" (lookup-key (current-global-map) (kbd "C-x r")))
 
-;; Rebind CUA rectangle selection (conflicts with org C-ret)
-;; Needs to happen before turning on cua mode
-(setq cua-rectangle-mark-key (kbd "<C-M-return>"))
-;; I don't live in emacs yet...
-(cua-mode t)
+;; Remap these keys to the C-x/C-c keymaps.
+;; Using C-S-x means that they work in CUA mode even if mark is active.
+(define-key key-translation-map (kbd "<f3>") (kbd "C-S-x"))
+(define-key key-translation-map (kbd "<f4>") (kbd "C-S-c"))
+
+;; Load early, since it is fundamental
+(use-package counsel
+  ;; It appears that without this demand, projectile isn't loaded on demand
+  :demand
+  :config
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  ;; Prevent backspace from closing the buffer, a little surprising
+  (setq ivy-on-del-error-function nil)
+  ;; Seems pretty important, so that in Ctrl+f, pressing down or up can cycle
+  (setq ivy-wrap t)
+  ;; Only real buffers
+  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
+  :bind (("C-f" . swiper)
+         ("C-o" . counsel-find-file)
+         ("C-e" . ivy-switch-buffer)
+         :map swiper-map
+         ("C-f" . swiper-C-s)
+         :map ivy-minibuffer-map
+         ("<S-return>" . ivy-call)
+         ("<C-return>" . ivy-immediate-done)))
 
 ;; If I eventually live in emacs, this will probably be useful
 ;; Cua-mode implies delete-selection mode though.
@@ -184,33 +213,6 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 ;;
 (setq-default isearch-nonincremental t)
 #+end_example
-* Ivy/counsel
-https://oremacs.com/swiper/#getting-started
-Ivy is quite important, so load it early.
-#+BEGIN_SRC emacs-lisp
-(use-package counsel
-  ;; It appears that without this demand, projectile isn't loaded on demand
-  :demand
-  :config
-  (ivy-mode 1)
-  (counsel-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  ;; Prevent backspace from closing the buffer, a little surprising
-  (setq ivy-on-del-error-function nil)
-  ;; Seems pretty important, so that in Ctrl+f, pressing down or up can cycle
-  (setq ivy-wrap t)
-  ;; Only real buffers
-  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
-  :bind (("C-f" . swiper)
-         ("C-o" . counsel-find-file)
-         ("C-." . ivy-switch-buffer)
-         :map swiper-map
-         ("C-f" . swiper-C-s)
-         :map ivy-minibuffer-map
-         ("<S-return>" . ivy-call)
-         ("<C-return>" . ivy-immediate-done)))
-#+END_SRC
 * Find/search
 #+begin_src emacs-lisp
 ;; Why isn't this bound by default? Great command
