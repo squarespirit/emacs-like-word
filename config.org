@@ -469,7 +469,7 @@ Use ivy-rich to print more info
   (require 'spaceline-config)
   (spaceline-emacs-theme))
 #+END_SRC
-* Files and sessions
+* Files
 #+BEGIN_SRC emacs-lisp
 ;; https://www.johndcook.com/blog/emacs_windows/
 ;; Use temp folder for backup files
