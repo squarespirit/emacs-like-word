@@ -200,11 +200,16 @@ Ivy is quite important, so load it early.
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
   :bind (("C-d" . swiper)
          ("C-o" . counsel-find-file)
-         ("C-e" . ivy-switch-buffer)
+         ("C-." . ivy-switch-buffer)
          :map ivy-minibuffer-map
          ("<S-return>" . ivy-call)
          ("<C-return>" . ivy-immediate-done)))
 #+END_SRC
+* Find/search
+#+begin_src emacs-lisp
+;; Why isn't this bound by default? Great command
+(bind-keys ("M-i" . imenu))
+#+end_src
 * Window management
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
