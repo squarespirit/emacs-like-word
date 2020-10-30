@@ -23,7 +23,7 @@ However, use-package must first be installed.
 ;; https://stackoverflow.com/a/650386
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; Issues with binding to 'keyboard-escape-quit: ESC can kill other windows
-;; Issues with binding to 'keyboard-quit: ESC can't exit minibuffer and many
+;; Issues with binding to -quit: ESC can't exit minibuffer and many
 ;; other things
 
 ;; Rebind some stuff that causes me pain
@@ -42,6 +42,7 @@ However, use-package must first be installed.
 (cua-mode t)
 
 ;; If I eventually live in emacs, this will probably be useful
+;; Cua-mode implies delete-selection mode though.
 ;; (delete-selection-mode 1)
 
 ;; Backspace/delete should not copy to clipboard
