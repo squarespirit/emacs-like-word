@@ -65,7 +65,7 @@ This command does not push text to `kill-ring'."
 With argument, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
-  (my-delete-word (- arg)))
+  (mw-delete-word-no-cut (- arg)))
 (bind-keys
  ("<C-backspace>" . my-backward-delete-word-no-cut)
  ("<C-delete>" . my-delete-word-no-cut)
