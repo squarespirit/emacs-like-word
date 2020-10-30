@@ -490,9 +490,6 @@ Use ivy-rich to print more info
 ;; Since I use Dropbox and git heavily, this is probably a good idea
 ;; https://magit.vc/manual/magit/Automatic-Reverting-of-File_002dVisiting-Buffers.html
 (global-auto-revert-mode +1)
-
-;; Sessions
-(desktop-save-mode 1)
 #+END_SRC
 ** Treemacs
 #+begin_src emacs-lisp
@@ -519,16 +516,26 @@ Use ivy-rich to print more info
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :demand  ;; Should always be loaded
-  :after ivy
   :config
   (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
   ;; Unbind this so ESC exits the command map
   (define-key projectile-command-map (kbd "ESC") nil)
-  ;; :bind-keymap (("C-p" . projectile-command-map))
-  :bind (("C-S-f" . projectile-ripgrep)
-         ("C-n" . projectile-find-file)))
+  :bind-keymap (("M-p" . projectile-command-map)))
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode +1)
+  :bind (("C-S-f" . counsel-projectile-rg)
+         ("C-S-n" . counsel-projectile-find-file)))
 #+END_SRC
+* Sessions
+#+begin_src emacs-lisp
+;; Sessions
+;; (desktop-save-mode 1)
+;; No longer needed
+;; This is sufficient
+(save-place-mode 1)
+#+end_src
 * Org
 ** Basic org keybindings
 #+BEGIN_SRC emacs-lisp
