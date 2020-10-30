@@ -71,6 +71,9 @@ This command does not push text to `kill-ring'."
 
 (setq-default sentence-end-double-space nil)
 
+;; More context
+(setq-default next-screen-context-lines 10)
+
 ;; change all yes-or-no prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
 
