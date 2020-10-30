@@ -223,10 +223,13 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
 * Window management
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
-  :bind (("M-o" . ace-window))
+  :bind (("<f9>" . ace-window))
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
-(bind-keys ("C-q" . delete-other-windows))  ;; Don't use quoted insert a lot.
+(bind-keys
+ ("<f10>" . delete-other-windows)
+ ;; Easy to hit accidentally
+ ("<f11>" . nil))
 (use-package transpose-frame
   :config
   (defun my-rotate-frame-clockwise-with-treemacs ()
