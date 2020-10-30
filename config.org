@@ -549,7 +549,8 @@ Use ivy-rich to print more info
   (setq dashboard-items '((recents  . 5)
 ;;                          (bookmarks . 5)
                           (projects . 5)
-                          (agenda . 5))))
+                          (agenda . 5)))
+  (setq dashboard-set-footer nil))
 #+end_src
 * Org
 ** Basic org keybindings
