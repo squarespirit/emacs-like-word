@@ -60,15 +60,15 @@ This command does not push text to `kill-ring'."
    (progn
      (forward-word arg)
      (point))))
-(defun my-backward-delete-word-no-cut (arg)
+(defun mw-backward-delete-word-no-cut (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
   (mw-delete-word-no-cut (- arg)))
 (bind-keys
- ("<C-backspace>" . my-backward-delete-word-no-cut)
- ("<C-delete>" . my-delete-word-no-cut)
+ ("<C-backspace>" . mw-backward-delete-word-no-cut)
+ ("<C-delete>" . mw-delete-word-no-cut)
  ;; M-backspace is already backward-kill-word.
  ;; M-backspace and M-delete both overwrite the clipboard. 
  ("<M-delete>" . kill-word))
