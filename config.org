@@ -38,15 +38,11 @@ However, use-package must first be installed.
 ;; Rebind CUA rectangle selection (conflicts with org C-ret)
 ;; Needs to happen before turning on cua mode
 (setq cua-rectangle-mark-key (kbd "<C-M-return>"))
-;; Use it for improved selection abilities
+;; I don't live in emacs yet...
 (cua-mode t)
-;; Do not rebind cut, copy, paste though
-(cua-selection-mode t)
 
-;; Unbind this - can use page up/down instead.
-;; I keep hitting it accidentally to paste though.
-(bind-keys ("C-v" . cua-paste))
-
+;; If I eventually live in emacs, this will probably be useful
+;; (delete-selection-mode 1)
 
 ;; Backspace/delete should not copy to clipboard
 ;; http://ergoemacs.org/emacs/emacs_kill-ring.html
@@ -57,7 +53,7 @@ This command does not push text to `kill-ring'."
   (interactive "p")
   (delete-region
    (point)
-   (progn
+     (progn
      (forward-word arg)
      (point))))
 (defun mw-backward-delete-word-no-cut (arg)
@@ -72,6 +68,8 @@ This command does not push text to `kill-ring'."
  ;; M-backspace is already backward-kill-word.
  ;; M-backspace and M-delete both overwrite the clipboard. 
  ("<M-delete>" . kill-word))
+
+(setq-default sentence-end-double-space nil)
 
 ;; change all yes-or-no prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -471,10 +469,11 @@ Use ivy-rich to print more info
 #+END_SRC
 * Files
 #+BEGIN_SRC emacs-lisp
+;; Move all the autosave files to one directory
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
+
 ;; https://www.johndcook.com/blog/emacs_windows/
-;; Use temp folder for backup files
-(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 ;; Delete to recycle bin
 (setq delete-by-moving-to-trash t)
 (setq create-lockfiles nil)
