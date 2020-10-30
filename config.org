@@ -35,8 +35,10 @@ However, use-package must first be installed.
 ;; Rebind some stuff that causes me pain
 (require 'bind-key)
 (bind-keys
- ("C-s" . save-buffer) ;; I'm sorry, there's just way too much muscle memory here.
- ("C-o" . find-file))
+ ;; I'm sorry, there's just way too much muscle memory here.
+ ("C-s" . save-buffer)
+ ;; Easier to hit.
+ ("M-SPC" . cua-set-mark))
  ;;("M-/" . exchange-point-and-mark)
 ;; Rebind to rectangle commands
 (bind-key "M-r" (lookup-key (current-global-map) (kbd "C-x r")))
