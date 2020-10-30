@@ -202,9 +202,11 @@ Ivy is quite important, so load it early.
   (setq ivy-wrap t)
   ;; Only real buffers
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
-  :bind (("C-d" . swiper)
+  :bind (("C-f" . swiper)
          ("C-o" . counsel-find-file)
          ("C-." . ivy-switch-buffer)
+         :map swiper-map
+         ("C-f" . swiper-C-s)
          :map ivy-minibuffer-map
          ("<S-return>" . ivy-call)
          ("<C-return>" . ivy-immediate-done)))
