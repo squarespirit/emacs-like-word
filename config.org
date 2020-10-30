@@ -200,7 +200,7 @@ Ivy is quite important, so load it early.
   (setq ivy-wrap t)
   ;; Only real buffers
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
-  :bind (("C-f" . swiper-isearch)  ;; I use arrow keys instead
+  :bind (("C-d" . swiper)
          ("C-o" . counsel-find-file)
          ("C-e" . ivy-switch-buffer)
          :map ivy-minibuffer-map
