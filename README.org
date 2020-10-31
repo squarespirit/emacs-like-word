@@ -1,0 +1,28 @@
+* Emacs config
+The keybindings are kind of a compromise between Emacs and IntelliJ.
+| Key       | Map                          | Reason/inspiration        | Overrides      | Instead use |
+|-----------+------------------------------+---------------------------+----------------+-------------|
+| C-z       | Undo                         | cua-mode                  | Suspend        |             |
+| C-x       | Cut                          | cua-mode                  | C-x map        | C-S-x, F5   |
+| C-c       | Copy                         | cua-mode                  | C-c map        | C-S-c, F6   |
+| C-v       | Paste                        | cua-mode                  | Page down      | PgDn        |
+| F5        | C-x even when mark is active |                           |                |             |
+| F6        | C-c even when mark is active |                           |                |             |
+| C-s       | Save                         | Many apps                 | Search         | C-f         |
+| C-f       | Find (w/ Swiper)             | Many apps                 | Next char      | Arrow keys  |
+| C-o       | Open file                    | Many apps                 | Open line      | Enter?      |
+| M-Spc     | Set mark                     | More ergonomic than C-Spc | Just one space |             |
+| C-w/C-S-w | Expand/contract region       | IntelliJ                  | Cut            | C-x         |
+| F9        | Other window                 |                           |                |             |
+| F10       | Make only window             |                           |                |             |
+| C-e       | Switch buffer                | IntelliJ/VScode           | End of line    | End         |
+| C-Tab     | Switch buffer                | IntelliJ/VScode           |                |             |
+| M-p       | Project menu                 |                           |                |             |
+| C-S-f     | Search in project            | IntelliJ/VScode           |                |             |
+| C-S-n     | Find file in project         | IntelliJ                  |                |             |
+
+General approach
+- Cua mode
+- Swiper for search, Ivy for completion
+- Two buffer switchers: C-Tab switches in a single keychord. C-e to search for buffers.
+- Projectile for project management
