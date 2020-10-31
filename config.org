@@ -45,8 +45,8 @@ However, use-package must first be installed.
 
 ;; Remap these keys to the C-x/C-c keymaps.
 ;; Using C-S-x means that they work in CUA mode even if mark is active.
-(define-key key-translation-map (kbd "<f3>") (kbd "C-S-x"))
-(define-key key-translation-map (kbd "<f4>") (kbd "C-S-c"))
+(define-key key-translation-map (kbd "<f5>") (kbd "C-S-x"))
+(define-key key-translation-map (kbd "<f6>") (kbd "C-S-c"))
 
 ;; Load early, since it is fundamental
 (use-package counsel
