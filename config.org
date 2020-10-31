@@ -156,9 +156,9 @@ This command does not push text to `kill-ring'."
 ** Expand region
 #+BEGIN_SRC emacs-lisp
 ;; TODO new key for this
-;; (use-package expand-region
-;;   :bind (("C-y" . er/expand-region)
-;;          ("C-S-y" . er/contract-region)))
+(use-package expand-region
+  :bind (("C-w" . er/expand-region)
+         ("C-S-w" . er/contract-region)))
 #+END_SRC
 ** M-x
 Main advantage of smex is that now up/down in M-x will cycle through your most recent commands.
