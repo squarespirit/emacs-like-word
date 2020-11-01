@@ -681,6 +681,54 @@ Use ivy-rich to print more info
   (org-forward-paragraph))
 (define-key org-mode-map (kbd "<C-down>") 'mw-org-forward-paragraph)
 
+;; (setq-default org-agenda-sorting-strategy '(timestamp-up))
+;; Numeric priorities. TODO this does not appear to work
+;; (setq-default org-priority-highest 1)
+;; (setq-default org-priority-lowest 3)
+;; (setq-default org-priority-default 2)
+
+;; Todo states
+(define-key org-mode-map (kbd "C-t") 'org-todo)
+(setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
+
+;; org goto - nice way to move around
+;; actually I don't really use it
+;; (define-key org-mode-map (kbd "C-j") 'org-goto)
+;; Would really like to make esc exit. However, this doesn't appear to work
+;; Seems to be the most up-to-date source code of org
+;; https://github.com/bzg/org-mode/blob/master/lisp/org-goto.el
+;; (defun add-extra-keys-to-org-goto-map (&rest)
+;;   (message "Adding escape to org goto map")
+;;   (define-key org-goto-map (kbd "<escape>") 'org-goto-quit)
+;;   (message "Value of escape is %s" (lookup-key org-goto-map (kbd "<escape>"))))
+;; (advice-add 'org-goto-location :before #'add-extra-keys-to-org-goto-map)
+;; And left/right should not exit; that is quite jarring.
+;; Actually this is maybe not a good idea.
+;; (defun org-goto-left ()
+;;   (interactive)
+;;   (backward-char))
+;; (defun org-goto-right ()
+;;   (interactive)
+;;   (forward-char))
+
+;; Suggested global keybinds in https://orgmode.org/manual/Activation.html
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+;; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html
+(setq-default org-columns-default-format "%50ITEM %TODO %1PRIORITY %20TAGS %20DEADLINE %20SCHEDULED")
+
+(define-key org-mode-map (kbd "M-[") 'org-previous-visible-heading)
+(define-key org-mode-map (kbd "M-]") 'org-next-visible-heading)
+
+;; src editing configs
+(setq org-src-tab-acts-natively t)
+(setq org-edit-src-content-indentation 0)
+
+(add-to-list 'org-structure-template-alist '("L" . "src emacs-lisp"))
+#+END_SRC
+*** Swap meta-left and meta-shift-left for headings
+#+begin_src emacs-lisp
 ;; Swap M-left/right and S-M-left/right, so that all the unshifted
 ;; M-<arrow keys> work on subtrees.
 ;; May be very controversial.
@@ -785,52 +833,7 @@ and returns at first non-nil value."
     (call-interactively 'org-indent-item))
    (t (org-modifier-cursor-error))))
 (define-key org-mode-map (kbd "<M-S-right>") 'my-shiftmetaright)
-
-;; (setq-default org-agenda-sorting-strategy '(timestamp-up))
-;; Numeric priorities. TODO this does not appear to work
-;; (setq-default org-priority-highest 1)
-;; (setq-default org-priority-lowest 3)
-;; (setq-default org-priority-default 2)
-
-;; Todo states
-(define-key org-mode-map (kbd "C-t") 'org-todo)
-(setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
-
-;; org goto - nice way to move around
-(define-key org-mode-map (kbd "C-j") 'org-goto)
-;; Would really like to make esc exit. However, this doesn't appear to work
-;; Seems to be the most up-to-date source code of org
-;; https://github.com/bzg/org-mode/blob/master/lisp/org-goto.el
-;; (defun add-extra-keys-to-org-goto-map (&rest)
-;;   (message "Adding escape to org goto map")
-;;   (define-key org-goto-map (kbd "<escape>") 'org-goto-quit)
-;;   (message "Value of escape is %s" (lookup-key org-goto-map (kbd "<escape>"))))
-;; (advice-add 'org-goto-location :before #'add-extra-keys-to-org-goto-map)
-;; And left/right should not exit; that is quite jarring.
-;; Actually this is maybe not a good idea.
-;; (defun org-goto-left ()
-;;   (interactive)
-;;   (backward-char))
-;; (defun org-goto-right ()
-;;   (interactive)
-;;   (forward-char))
-
-;; Suggested global keybinds in https://orgmode.org/manual/Activation.html
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
-;; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html
-(setq-default org-columns-default-format "%50ITEM %TODO %1PRIORITY %20TAGS %20DEADLINE %20SCHEDULED")
-
-(define-key org-mode-map (kbd "M-[") 'org-previous-visible-heading)
-(define-key org-mode-map (kbd "M-]") 'org-next-visible-heading)
-
-;; src editing configs
-(setq org-src-tab-acts-natively t)
-(setq org-edit-src-content-indentation 0)
-
-(add-to-list 'org-structure-template-alist '("L" . "src emacs-lisp"))
-#+END_SRC
+#+end_src
 *** Old select subtree
 No longer needed with expand-region.
 #+begin_example
