@@ -316,6 +316,19 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
 * Buffers
 #+BEGIN_SRC emacs-lisp
 (bind-keys ("<C-f4>" . kill-current-buffer))
+(defun mw-is-buffer-ignored (name)
+  "Return t if the buffer is a non-user buffer and should be ignored. This is defined once
+to provide a consistent interface across all buffer switchers."
+  (and 
+   (or (string-prefix-p "*" name)
+       (string-prefix-p " *" name)
+       (string-prefix-p "`" name)
+       (string-prefix-p " `" name))
+   (not (or
+	 ;; Whitelist of special buffers
+	 ;; (string-equal "*scratch*" name)
+	 (string-prefix-p "*Custom" name)
+	 ))))
 #+end_src
 ** Tabs
 #+BEGIN_SRC emacs-lisp
@@ -330,9 +343,7 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
   (setq centaur-tabs-cycle-scope 'tabs)
   (defun centaur-tabs-buffer-groups ()
    (list
-    (cond
-     ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
-     (t "text"))))
+    (if (mw-is-buffer-ignored (buffer-name)) "Emacs" "User")))
   ;; I never want to switch to the Emacs buffers anyway.
   ;; This is naive but at least reduces confusion about multiple groups
   ;; (defun centaur-tabs-buffer-groups () (list "single-group"))
@@ -385,6 +396,7 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
 ** Ctrl-e switcher
 Use ivy-rich to print more info
 #+begin_src emacs-lisp
+(setq ivy-ignore-buffers '(mw-is-buffer-ignored))
 (use-package ivy-rich
   :after ivy
   :config
