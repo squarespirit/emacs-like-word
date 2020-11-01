@@ -28,7 +28,7 @@ other-window, delete-window, and delete-other-windows are also important, but do
 |-------+----------------------------------------------------+-------------------|
 | F9    | Other window                                       |                   |
 | M-o   | Other window                                       | Something useless |
-| F10   | Make only window                                   |                   |
+| F10   | Delete other windows                               |                   |
 | S-Esc | keyboard escape quit (which deletes other windows) |                   |
 
 ** Buffer switching
@@ -37,10 +37,13 @@ I think modern editors have a few different buffer switchers:
 - C-Tab: single-press to switch buffers. Press again to switch further between the most recently used.
 - C-e: search for buffer by name
 Both VScode and IntelliJ have all of these. They're here too
-| Key   | Map           | Overrides                 |
-|-------+---------------+---------------------------|
-| C-e   | Switch buffer | End - use End key instead |
-| C-Tab | Switch buffer |                           |
+| Key           | Map                 | Overrides                 |
+|---------------+---------------------+---------------------------|
+| C-F4          | Kill current buffer |                           |
+| C-PgUp/Pgdn   | Next/previous tab   |                           |
+| C-S-Pgup/pgdn | Rearrange tabs      |                           |
+| C-e           | Switch buffer       | End - use End key instead |
+| C-Tab         | Switch buffer       |                           |
 
 ** Projects
 Projectile is used for poject management.
