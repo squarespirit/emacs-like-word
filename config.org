@@ -616,7 +616,7 @@ Use ivy-rich to print more info
 (define-key org-mode-map (kbd "<C-tab>") nil) ;; tab switcher
 (define-key org-mode-map (kbd "C-'") nil)
 
-(setq-default org-special-ctrl-a/e t)
+(setq-default org-special-ctrl-a/e 'reversed)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
 
