@@ -314,8 +314,11 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
  )
 #+end_src
 * Buffers
+#+BEGIN_SRC emacs-lisp
+(bind-keys ("<C-f4>" . kill-current-buffer))
+#+end_src
 ** Tabs
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC emacs-lisp
 (use-package centaur-tabs
   :demand
   :config
@@ -343,8 +346,10 @@ http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
 
   :bind
   ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward))
-#+END_EXAMPLE
+  ("C-<next>" . centaur-tabs-forward)
+  ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
+  ("C-S-<next>" . centaur-tabs-move-current-tab-to-right))
+#+END_SRC
 ** Old ctrl-tab buffer switcher
 #+begin_example
 (defun switch-to-other-buffer ()
