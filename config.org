@@ -605,7 +605,7 @@ Use ivy-rich to print more info
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
-** Basic org keybindings
+** Basic editing
 #+BEGIN_SRC emacs-lisp
 ;; Make org give up shift-arrow keys
 ;; https://orgmode.org/manual/Conflicts.html
@@ -626,7 +626,9 @@ Use ivy-rich to print more info
 (setq-default org-special-ctrl-a/e 'reversed)
 (define-key org-mode-map (kbd "<home>") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "<end>") 'org-end-of-line)
-
+#+end_src
+*** Special paste
+#+begin_src emacs-lisp
 ;; Special paste in org mode
 ;; Redefine `yank` for org-mode. cua-paste indirectly calls it.
 ;; Note: if paste has bugs, run original-yank
@@ -647,7 +649,9 @@ Use ivy-rich to print more info
 ;; - UNBIND C-v from cua-mode. Set it in global keymap instead.
 ;; - In org mode map, set C-v to smart paste, C-S-v to normal paste.
 (define-key org-mode-map (kbd "C-v") 'org-yank)
-
+#+end_src
+*** Enable shift selection on paragraphs
+#+begin_src emacs-lisp
 ;; Unbind C-S-up/down so that shift selection on paragraphs can take place.
 ;; They were org-clock-timestamps-up/down.
 ;; https://orgmode.org/manual/Clocking-commands.html
