@@ -1,28 +1,52 @@
 * Emacs config
-The keybindings are kind of a compromise between Emacs and IntelliJ.
-| Key       | Map                          | Reason/inspiration        | Overrides      | Instead use |
-|-----------+------------------------------+---------------------------+----------------+-------------|
-| C-z       | Undo                         | cua-mode                  | Suspend        |             |
-| C-x       | Cut                          | cua-mode                  | C-x map        | C-S-x, F5   |
-| C-c       | Copy                         | cua-mode                  | C-c map        | C-S-c, F6   |
-| C-v       | Paste                        | cua-mode                  | Page down      | PgDn        |
-| F5        | C-x even when mark is active |                           |                |             |
-| F6        | C-c even when mark is active |                           |                |             |
-| C-s       | Save                         | Many apps                 | Search         | C-f         |
-| C-f       | Find (w/ Swiper)             | Many apps                 | Next char      | Arrow keys  |
-| C-o       | Open file                    | Many apps                 | Open line      | Enter?      |
-| M-Spc     | Set mark                     | More ergonomic than C-Spc | Just one space |             |
-| C-w/C-S-w | Expand/contract region       | IntelliJ                  | Cut            | C-x         |
-| F9        | Other window                 |                           |                |             |
-| F10       | Make only window             |                           |                |             |
-| C-e       | Switch buffer                | IntelliJ/VScode           | End of line    | End         |
-| C-Tab     | Switch buffer                | IntelliJ/VScode           |                |             |
-| M-p       | Project menu                 |                           |                |             |
-| C-S-f     | Search in project            | IntelliJ/VScode           |                |             |
-| C-S-n     | Find file in project         | IntelliJ                  |                |             |
+The keybindings are kind of a compromise between Emacs and IntelliJ. I'll actually explain some of the design of the config here.
+** Basic editing
+The approach is to use cua mode, and also bind familiar shortcuts like C-s, C-f, and C-o, because they are so commonly used in other apps. This helps avoid shellshock when switching to Emacs.
 
-General approach
-- Cua mode
-- Swiper for search, Ivy for completion
-- Two buffer switchers: C-Tab switches in a single keychord. C-e to search for buffers.
-- Projectile for project management
+This causes lots of key conflicts, but it is possible to work around many of them. The C-x/C-c maps are also available through some function keys.
+
+Ivy is used for completion, and swiper for search at C-f.
+
+| Key       | Map                              | Reason/inspiration        | Overrides      | Instead use |
+|-----------+----------------------------------+---------------------------+----------------+-------------|
+| C-z       | Undo                             | cua-mode                  | Suspend        |             |
+| C-x       | Cut                              | cua-mode                  | C-x map        | C-S-x, F5   |
+| C-c       | Copy                             | cua-mode                  | C-c map        | C-S-c, F6   |
+| C-v       | Paste                            | cua-mode                  | Page down      | PgDn        |
+| F5        | C-x map even when mark is active |                           |                |             |
+| F6        | C-c map even when mark is active |                           |                |             |
+| C-s       | Save                             | Many apps                 | Search         | C-f         |
+| C-f       | Find (w/ Swiper)                 | Many apps                 | Next char      | Arrow keys  |
+| C-o       | Open file                        | Many apps                 | Open line      | Enter, Left |
+| M-Spc     | Set mark                         | More ergonomic than C-Spc | Just one space | Not rebound |
+| C-w/C-S-w | Expand/contract region           | IntelliJ                  | Cut            | C-x         |
+
+** Window management
+I think windmove is the sanest way to switch windows. It's not bound anywhere though...
+other-window, delete-window, and delete-other-windows are also important, but don't have great keybindings by default.
+| Key   | Map                                                | Overrides         |
+|-------+----------------------------------------------------+-------------------|
+| F9    | Other window                                       |                   |
+| M-o   | Other window                                       | Something useless |
+| F10   | Make only window                                   |                   |
+| S-Esc | keyboard escape quit (which deletes other windows) |                   |
+
+** Buffer switching
+I think modern editors have a few different buffer switchers:
+- Tabs: ok for a few buffers, but do not scale well to many buffers
+- C-Tab: single-press to switch buffers. Press again to switch further between the most recently used.
+- C-e: search for buffer by name
+Both VScode and IntelliJ have all of these. They're here too
+| Key   | Map           | Overrides                 |
+|-------+---------------+---------------------------|
+| C-e   | Switch buffer | End - use End key instead |
+| C-Tab | Switch buffer |                           |
+
+** Projects
+Projectile is used for poject management.
+C-S-f is like IntelliJ/Vscode, and C-S-n is like IntelliJ..
+| Key   | Map                  |
+|-------+----------------------|
+| M-p   | Project menu         |
+| C-S-f | Search in project    |
+| C-S-n | Find file in project |
