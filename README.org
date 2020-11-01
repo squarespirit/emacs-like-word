@@ -12,7 +12,8 @@ Ivy is used for completion, and swiper for search at C-f.
 | C-z       | Undo                             | cua-mode                  | Suspend        |             |
 | C-x       | Cut                              | cua-mode                  | C-x map        | C-S-x, F5   |
 | C-c       | Copy                             | cua-mode                  | C-c map        | C-S-c, F6   |
-| C-v       | Paste                            | cua-mode                  | Page down      | PgDn        |
+| C-v       | Paste (major modes can override) | cua-mode                  | Page down      | PgDn        |
+| C-S-v     | Paste as plain text              |                           |                |             |
 | F5        | C-x map even when mark is active |                           |                |             |
 | F6        | C-c map even when mark is active |                           |                |             |
 | C-s       | Save                             | Many apps                 | Search         | C-f         |
