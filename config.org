@@ -231,6 +231,7 @@ Main advantage of smex is that now up/down in M-x will cycle through your most r
  ;; Easy to hit accidentally
  ("<f11>" . nil))
 (bind-keys ("<S-escape>" . keyboard-escape-quit))
+(bind-keys ("M-o" . other-window))
 (use-package transpose-frame
   :config
   (defun my-rotate-frame-clockwise-with-treemacs ()
