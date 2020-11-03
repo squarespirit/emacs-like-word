@@ -1,7 +1,8 @@
 ;; Suggested global keybinds in https://orgmode.org/manual/Activation.html
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+(bind-keys
+ ("C-c l" . org-store-link)
+ ("C-c a" . org-agenda)
+ ("C-c c" . org-capture))
 
 ;; Make org give up shift-arrow keys
 ;; https://orgmode.org/manual/Conflicts.html
@@ -12,10 +13,11 @@
 
 (require 'org)
 ;; Do not override these keys
-(define-key org-mode-map (kbd "C-e") nil) ;; buf switcher
-;; (define-key org-mode-map (kbd "C-y") nil)
-(define-key org-mode-map (kbd "<C-tab>") nil) ;; tab switcher
-(define-key org-mode-map (kbd "C-'") nil)
+(bind-keys :map org-mode-map
+	   ("C-e" . nil)  ;; buf switcher
+	   ("<C-tab>" . nil)  ;; tab switcher
+	   ("C-'" . nil) ;; treemacs
+	   ("<S-return>" . nil))
 
 ;; Mouse support
 (require 'org-mouse)
@@ -30,8 +32,9 @@
 (define-key org-mode-map (kbd "C-t") 'org-todo)
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
 
-(define-key org-mode-map (kbd "M-[") 'org-previous-visible-heading)
-(define-key org-mode-map (kbd "M-]") 'org-next-visible-heading)
+(bind-keys :map org-mode-map
+	   ("M-[" . org-previous-visible-heading)
+	   ("M-]" . org-next-visible-heading))
 
 (dolist
     (file '("org-paragraph-select.el"
