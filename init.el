@@ -15,6 +15,7 @@
 	    "company.el"
 	    "imenu.el"
 	    "which-key.el"
+	    "multi-cursor.el"
 
 	    "window-management.el"
 
