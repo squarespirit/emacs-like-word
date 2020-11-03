@@ -8,7 +8,8 @@
 ;;                          (bookmarks . 5)
                           (projects . 5)))
 ;; Don't generate agenda on startup, so that we don't load a bunch of org files at startup
-;;                           (agenda . 5)
+  ;;                           (agenda . 5)
+  (setq dashboard-startup-banner nil)
   (setq dashboard-set-footer nil))
   ;; Keybinds don't work
   ;; (define-key dashboard-mode-map (kbd "p") 'counsel-projectile-switch-project)
