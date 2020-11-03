@@ -20,17 +20,17 @@
   "If region is inactive, select symbol at point. Otherwise select next occurrence of region"
   (interactive)
   (if (use-region-p)
-      (mc/mark-next-like-this 1)
+      (mc/mark-next-symbol-like-this 1)
     (mw-select-symbol)))
 
-(defun mw-unselect-next ()
+(defun mw-unselect-next-symbol ()
   (interactive)
-  (mc/mark-next-like-this -1))
+  (mc/mark-next-symbol-like-this -1))
 
 (bind-keys ("C-d" . mw-select-symbol-or-next)
-	   ("C-S-d" . mw-unselect-next))
+	   ("C-S-d" . mw-unselect-next-symbol))
 
 ;; These commands should not be run for all cursors
 (dolist
-    (f '(mw-select-symbol-or-next mw-unselect-next))
+    (f '(mw-select-symbol-or-next mw-unselect-next-symbol))
   (add-to-list 'mc/cmds-to-run-once f))
