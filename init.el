@@ -1,35 +1,51 @@
-;; https://harryrschwartz.com/2016/02/15/switching-to-a-literate-emacs-configuration
+(defvar mw-init-dir (concat user-emacs-directory "init/")
+  "Directory that contains all init files.")
 
-;; Startup speed boosters, based on Doom startup I think.
+(dolist
+    (file '("gc.el"
 
-;; Avoid garbage collection during startup. The GC eats up quite a bit of time, easily
-;; doubling the startup time. The trick is to turn up the memory threshold in order to
-;; prevent it from running during startup.
-(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
-      gc-cons-percentage 0.6)
+	    "packages.el"
 
-;; Every file opened and loaded by Emacs will run through this list to check for a proper
-;; handler for the file, but during startup, it won’t need any of them.
-(defvar file-name-handler-alist-original file-name-handler-alist)
-(setq file-name-handler-alist nil)
+	    "editing.el"
+	    "undo.el"
+	    "smartparens.el"
+	    "expand-region.el"
+	    "smex.el"
+	    "company.el"
+	    "imenu.el"
+	    "which-key.el"
 
-;; After Emacs startup has been completed, set `gc-cons-threshold'
-;; and reset `gc-cons-percentage' to its original value.
-;; Also reset `file-name-handler-alist'
-(add-hook 'emacs-startup-hook
-          '(lambda ()
-	     ;; 1mb
-             (setq gc-cons-threshold (* 1024 1024)
-                   gc-cons-percentage 0.1
-                   file-name-handler-alist file-name-handler-alist-original)
-             (makunbound 'file-name-handler-alist-original)))
+	    "window-management.el"
 
-;; Verbose gc
-(setq garbage-collection-messages t)
+	    "buffers.el"
+	    "buffers-tabs.el"
+	    "buffers-ctrl-tab.el"
+	    "buffers-ctrl-e.el"
 
-;; Garbage collect on focus lost - Emacs "should" feel snappier
-;; https://github.com/Bassmann/emacs-config/blob/master/emacs.org#garbage-collect-on-focus-out-emacs-should-feel-snappier
-(add-hook 'focus-out-hook #'garbage-collect)
+	    "terminal.el"
+
+	    "looks.el"
+	    "scroll.el"
+	    "modeline.el"
+	    
+	    "files.el"
+	    "treemacs.el"
+	    
+	    "project.el"
+
+	    "dashboard.el"
+	    
+	    "session-config.el"
+
+	    "org-config.el"
+
+	    "emacs-lisp.el"))
+  (load-file (concat mw-init-dir file)))
+
+(setq custom-file (concat mw-init-dir "custom.el"))
+(if (file-exists-p custom-file)
+   (load-file custom-file))
+
 
 ;; Load literate startup file
-(org-babel-load-file "~/.emacs.d/config.org")
+;; (org-babel-load-file "~/.emacs.d/config.org")
