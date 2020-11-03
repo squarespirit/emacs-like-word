@@ -965,6 +965,14 @@ https://yiming.dev/blog/2018/03/02/my-org-refile-workflow/
 
 (add-to-list 'org-structure-template-alist '("L" . "src emacs-lisp"))
 #+end_src
+* Lisp
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook (emacs-lisp-mode . rainbow-delimiters-mode))
+(defun mw-emacs-lisp-coding-defaults ()
+  (smartparens-strict-mode +1))
+(add-hook 'emacs-lisp-mode-hook 'mw-emacs-lisp-coding-defaults)
+#+end_src
 * Which key
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
