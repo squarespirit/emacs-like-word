@@ -8,6 +8,7 @@
 
 	    "editing.el"
 	    "undo.el"
+	    "crux.el"
 	    "smartparens.el"
 	    "expand-region.el"
 	    "smex.el"
