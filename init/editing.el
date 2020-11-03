@@ -19,8 +19,7 @@
 ;; Bind both to paste - but major modes can override C-v.
 (bind-keys
  ("C-v" . cua-paste)
- ("C-S-v" . cua-paste)
- ("M-v" . cua-paste-pop))
+ ("C-S-v" . cua-paste))
 
 ;; Rebind some stuff that causes me pain
 (require 'bind-key)

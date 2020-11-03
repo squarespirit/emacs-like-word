@@ -16,6 +16,7 @@
 	    "imenu.el"
 	    "which-key.el"
 	    "multi-cursor.el"
+	    "kill-ring.el"
 
 	    "window-management.el"
 
