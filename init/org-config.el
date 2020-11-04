@@ -78,6 +78,9 @@
 ;; (setq org-agenda-todo-ignore-deadlines 'all)
 ;; (setq org-agenda-todo-ignore-scheduled 'all)
 
+;; No blank before new entry/heading
+(dolist (v '(plain-list-item heading))
+  (setcdr (assoc v org-blank-before-new-entry) nil))
 
 ;; Refile
 ;; This is absurdly powerful.N
