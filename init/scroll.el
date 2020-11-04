@@ -9,6 +9,9 @@
 ;; https://stackoverflow.com/a/9646770
 (scroll-bar-mode -1)
 
+;; More context
+(setq-default next-screen-context-lines 10)
+
 ;; This does not appear to be enough - need smooth scrolling
 ;; Docs for scroll-step recommend against setting this and setting scroll-conservatively instead.
 ;; However, this appears to *slow down* scrolling thus making it less jumpy in a good way.
