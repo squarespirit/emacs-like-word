@@ -1,13 +1,3 @@
-;; Make esc cancel like C-g
-;; https://www.reddit.com/r/emacs/comments/67rlfr/esc_vs_cg/dgsozkc/
-;; This seems to work the best.
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-;; https://stackoverflow.com/a/650386
-;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-;; Issues with binding to 'keyboard-escape-quit: ESC can kill other windows
-;; Issues with binding to -quit: ESC can't exit minibuffer and many
-;; other things
-
 ;; Rebind CUA rectangle selection (conflicts with org C-ret)
 ;; Needs to happen before turning on cua mode
 (setq cua-rectangle-mark-key (kbd "<C-M-return>"))

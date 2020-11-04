@@ -6,6 +6,7 @@
 
 	    "packages.el"
 
+	    "esc.el"
 	    "editing.el"
 	    "undo.el"
 	    "crux.el"
