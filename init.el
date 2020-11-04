@@ -7,6 +7,7 @@
 	    "packages.el"
 
 	    "esc.el"
+	    "cua-clipboard.el"
 	    "editing.el"
 	    "undo.el"
 	    "crux.el"
@@ -17,7 +18,6 @@
 	    "imenu.el"
 	    "which-key.el"
 	    "multi-cursor.el"
-	    "kill-ring.el"
 
 	    "window-management.el"
 
