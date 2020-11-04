@@ -40,8 +40,6 @@
 ;; Rebind some stuff that causes me pain
 (require 'bind-key)
 (bind-keys
- ;; I'm sorry, there's just way too much muscle memory here.
- ("C-s" . save-buffer)
  ;; Easier to hit.
  ("M-SPC" . cua-set-mark))
  ;;("M-/" . exchange-point-and-mark)
@@ -69,7 +67,6 @@
   ;; Only real buffers
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
   :bind (("C-f" . swiper)
-         ("C-o" . counsel-find-file)
          ("C-e" . ivy-switch-buffer)
          :map swiper-map
          ("C-f" . swiper-C-s)

@@ -1,3 +1,9 @@
+(bind-keys
+  ;; I'm sorry, there's just way too much muscle memory here.
+ ("C-s" . save-buffer)
+ ;; Note: this naturally uses the completing read function
+ ("C-o" . find-file))
+
 ;; Move all the autosave files to one directory
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
