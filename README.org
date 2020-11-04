@@ -32,13 +32,10 @@ If you miss the feature from other editors that C-x and C-c cut/copy the whole l
 ESC is rebound to C-g so it has the familiar meaning of quitting. Unless you have a broken Alt key, you shouldn't use Esc to hit Alt. However, this probably means that terminal Emacs is probably broken.
 
 *** Other basic shortcuts
-Familiar shortcuts like C-s, C-f, and C-o are bound because they are so common in other apps, and the Emacs defaults require 2 keys so are kind of awkward.
-
+C-f is bound mainly out of muscle memory.
 | Key       | Map                       | Reason/inspiration        | Overrides      | Instead use |
 |-----------+---------------------------+---------------------------+----------------+-------------|
-| C-s       | Save                      | Many apps                 | Search         | C-f         |
 | C-f       | Find (w/ Swiper)          | Many apps                 | Next char      | Arrow keys  |
-| C-o       | Open file                 | Many apps                 | Open line      | Enter, Left |
 | M-Spc     | Set mark                  | More ergonomic than C-Spc | Just one space | None        |
 | C-w/C-S-w | Expand/contract region    | IntelliJ                  | Cut            | C-x         |
 | S-return  | Insert line below         | IntelliJ                  |                |             |
@@ -75,6 +72,15 @@ Both VScode and IntelliJ have all of these. They're here too
 | C-S-Pgup/pgdn | Rearrange tabs      |                           |
 | C-e           | Switch buffer       | End - use End key instead |
 | C-Tab         | Switch buffer       |                           |
+
+** Files
+C-o and C-s are rebound out of muscle memory and because the Emacs defaults are kind of awkward.
+| Key   | Map                   | Reason/inspiration | Overrides | Instead use |
+|-------+-----------------------+--------------------+-----------+-------------|
+| C-o   | Open OR make new file | Many apps          | Open line | Enter, Left |
+| C-s   | Save                  | Many apps          | Search    | C-f         |
+| C-S-s | Save as               |                    |           |             |
+| C-c r | Rename file           |                    |           |             |
 
 ** Projects
 Projectile is used for poject management.
