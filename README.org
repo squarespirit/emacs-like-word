@@ -78,12 +78,11 @@ Both VScode and IntelliJ have all of these. They're here too
 
 ** Projects
 Projectile is used for poject management.
-C-S-f is like IntelliJ/Vscode, and C-S-n is like IntelliJ..
-| Key   | Map                  |
-|-------+----------------------|
-| M-p   | Project menu         |
-| C-S-f | Search in project    |
-| C-S-n | Find file in project |
+| Key   | Map                  | Inspiration     |
+|-------+----------------------+-----------------|
+| M-p   | Project menu         |                 |
+| C-S-f | Search in project    | IntelliJ/Vscode |
+| C-S-n | Find file in project | IntelliJ        |
 
 ** Tree browser
 C-' to bring up the file tree.
