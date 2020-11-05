@@ -1,7 +1,7 @@
 ;; Rebind some stuff that causes me pain
 (bind-keys
  ;; Easier to hit. In particular, the mark can be set by one hand.
- ("M-SPC" . cua-set-mark))
+ ("M-SPC" . set-mark-command))
 
 ;; Should be on by default
 (delete-selection-mode 1)

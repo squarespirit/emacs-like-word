@@ -10,7 +10,6 @@
 
   ;; https://emacs.stackexchange.com/a/10838
   (setq company-dabbrev-downcase nil)
-  (define-key company-mode-map (kbd "<escape>") nil) 
-  :bind (("C-SPC" . company-complete)))
+  (define-key company-mode-map (kbd "<escape>") nil))
 
 
