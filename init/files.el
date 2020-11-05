@@ -1,14 +1,12 @@
 (bind-keys
-  ;; I'm sorry, there's just way too much muscle memory here.
- ;; ("C-s" . save-buffer)
  ;; Note: this naturally uses the completing read function
- ("C-o" . find-file)
- ;;("C-S-s" . write-file)
- )
+ ("C-o" . find-file))
 
 (use-package crux
   :bind
   ("C-c r" . crux-rename-buffer-and-file))
+
+(bind-keys ("C-c f" . counsel-recentf))
 
 ;; Move all the autosave files to one directory
 (setq backup-directory-alist
