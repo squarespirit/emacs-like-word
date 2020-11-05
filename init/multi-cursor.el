@@ -27,8 +27,8 @@
   (interactive)
   (mc/mark-next-symbol-like-this -1))
 
-(bind-keys ("C-d" . mw-select-symbol-or-next)
-	   ("C-S-d" . mw-unselect-next-symbol))
+;; (bind-keys ("C-d" . mw-select-symbol-or-next)
+;; 	   ("C-S-d" . mw-unselect-next-symbol))
 
 ;; These commands should not be run for all cursors
 (dolist

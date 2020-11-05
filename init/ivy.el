@@ -21,7 +21,6 @@
         (t      . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
   :bind (("C-s" . swiper)
-         ("C-e" . ivy-switch-buffer)
          :map ivy-minibuffer-map
          ("<S-return>" . ivy-call)
          ("<C-return>" . ivy-immediate-done)))

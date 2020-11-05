@@ -29,7 +29,7 @@
 	    "buffers.el"
 	    "buffers-tabs.el"
 	    "buffers-ctrl-tab.el"
-	    "buffers-ctrl-e.el"
+	    "buffers-by-name.el"
 
 	    "terminal.el"
 

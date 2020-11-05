@@ -1,3 +1,4 @@
+(bind-keys ("C-d" . ivy-switch-buffer))
 (setq ivy-ignore-buffers '(mw-is-buffer-ignored))
 (use-package ivy-rich
   :after ivy
