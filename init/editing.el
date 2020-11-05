@@ -1,11 +1,12 @@
 ;; Rebind some stuff that causes me pain
-(require 'bind-key)
 (bind-keys
- ;; Easier to hit.
+ ;; Easier to hit. In particular, the mark can be set by one hand.
  ("M-SPC" . cua-set-mark))
- ;;("M-/" . exchange-point-and-mark)
 ;; Rebind to rectangle commands
 (bind-key "M-r" (lookup-key (current-global-map) (kbd "C-x r")))
+
+;; Should be on by default
+(delete-selection-mode 1)
 
 ;; Backspace/delete should not copy to clipboard
 ;; http://ergoemacs.org/emacs/emacs_kill-ring.html

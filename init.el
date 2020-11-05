@@ -5,9 +5,11 @@
     (file '("gc.el"
 
 	    "packages.el"
+	    "bind-key.el"
 
 	    "esc.el"
-	    "cua-clipboard.el"
+	    "whole-line-or-region.el"
+	    "kill-ring.el"
 	    "editing.el"
 	    "super-save.el"
 	    "ivy.el"

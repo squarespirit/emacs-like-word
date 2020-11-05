@@ -1,11 +1,4 @@
-(use-package ace-window
-  :bind (("<f9>" . ace-window))
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
-(bind-keys
- ("<f10>" . delete-other-windows)
- ;; Easy to hit accidentally
- ("<f11>" . nil))
+(windmove-default-keybindings)
 (bind-keys ("<S-escape>" . keyboard-escape-quit))
 (bind-keys ("M-o" . other-window))
 (use-package transpose-frame
