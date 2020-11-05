@@ -20,6 +20,8 @@
 	    "which-key.el"
 	    "multi-cursor.el"
 
+	    "magit.el"
+	    
 	    "window-management.el"
 
 	    "buffers.el"
