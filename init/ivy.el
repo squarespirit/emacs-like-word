@@ -13,6 +13,13 @@
   (setq ivy-wrap t)
   ;; Only real buffers
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
+  ;; Fuzzy match except in swiper
+  ;; https://emacs.stackexchange.com/questions/36745/enable-ivy-fuzzy-matching-everywhere-except-in-swiper
+  ;; https://oremacs.com/2016/01/06/ivy-flx/
+  (setq ivy-re-builders-alist
+      '((swiper . ivy--regex-plus)
+        (t      . ivy--regex-fuzzy)))
+  (setq ivy-initial-inputs-alist nil)
   :bind (("C-f" . swiper)
          ("C-e" . ivy-switch-buffer)
          :map swiper-map
@@ -20,3 +27,10 @@
          :map ivy-minibuffer-map
          ("<S-return>" . ivy-call)
          ("<C-return>" . ivy-immediate-done)))
+
+;; Better fuzzy match
+(use-package flx)
+
+;; So hydras work properly in ivy
+(use-package ivy-hydra)
+
