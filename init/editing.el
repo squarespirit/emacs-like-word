@@ -2,36 +2,9 @@
 (bind-keys
  ;; Easier to hit. In particular, the mark can be set by one hand.
  ("M-SPC" . cua-set-mark))
-;; Rebind to rectangle commands
-(bind-key "M-r" (lookup-key (current-global-map) (kbd "C-x r")))
 
 ;; Should be on by default
 (delete-selection-mode 1)
-
-;; Backspace/delete should not copy to clipboard
-;; http://ergoemacs.org/emacs/emacs_kill-ring.html
-(defun mw-delete-word-no-cut (arg)
-  "Delete characters forward until encountering the end of a word.
-With argument, do this that many times.
-This command does not push text to `kill-ring'."
-  (interactive "p")
-  (delete-region
-   (point)
-     (progn
-     (forward-word arg)
-     (point))))
-(defun mw-backward-delete-word-no-cut (arg)
-  "Delete characters backward until encountering the beginning of a word.
-With argument, do this that many times.
-This command does not push text to `kill-ring'."
-  (interactive "p")
-  (mw-delete-word-no-cut (- arg)))
-(bind-keys
- ("<C-backspace>" . mw-backward-delete-word-no-cut)
- ("<C-delete>" . mw-delete-word-no-cut)
- ;; M-backspace is already backward-kill-word.
- ;; M-backspace and M-delete both overwrite the clipboard. 
- ("<M-delete>" . kill-word))
 
 (setq-default sentence-end-double-space nil)
 
