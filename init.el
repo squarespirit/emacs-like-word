@@ -9,6 +9,7 @@
 	    "esc.el"
 	    "cua-clipboard.el"
 	    "editing.el"
+	    "super-save.el"
 	    "ivy.el"
 	    "undo.el"
 	    "crux.el"
