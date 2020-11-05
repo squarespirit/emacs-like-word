@@ -27,3 +27,10 @@
 ;; Mouse
 ;; Let shift-click extend selection
 (bind-keys ("<S-down-mouse-1>" . mouse-save-then-kill))
+
+;; Make some commands smarter
+(use-package crux)
+(bind-keys
+ ("<S-return>" . crux-smart-open-line)
+ ("C-k" . crux-smart-kill-line)
+ ("C-S-j" . crux-top-join-line))

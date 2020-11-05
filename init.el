@@ -14,7 +14,6 @@
 	    "super-save.el"
 	    "ivy.el"
 	    "undo.el"
-	    "crux.el"
 	    "smartparens.el"
 	    "expand-region.el"
 	    "smex.el"
