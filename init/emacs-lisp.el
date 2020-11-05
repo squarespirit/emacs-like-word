@@ -6,12 +6,16 @@
 ;; Easier to reach
 (bind-keys
  :map emacs-lisp-mode-map
- ("<M-up>" . up-list)
- ("<M-down>" . down-list)
- ("<M-left>" . backward-sexp)
- ("<M-right>" . forward-sexp)
- ("<M-backspace>" . backward-kill-sexp)
- ("<M-delete>" . kill-sexp)
+ ("<M-up>" . sp-up-sexp)
+ ("<M-down>" . sp-down-sexp)
+ ("<M-left>" . sp-backward-sexp)
+ ("<M-right>" . sp-forward-sexp)
+ ("<M-S-right>" . sp-forward-slurp-sexp)
+ ("<M-S-left>" . sp-forward-barf-sexp)
+ ("<M-backspace>" . sp-backward-kill-sexp)
+ ("<M-delete>" . sp-kill-sexp)
+ ("C-t" . sp-transpose-sexp)
+ ("M-S-w" . sp-copy-sexp)
  ("M-[" . insert-parentheses)
  ("M-]" . move-past-close-and-reindent))
 
