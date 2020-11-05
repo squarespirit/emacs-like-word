@@ -10,7 +10,8 @@
  ("<M-down>" . down-list)
  ("<M-left>" . backward-sexp)
  ("<M-right>" . forward-sexp)
- ("M-DEL" . kill-sexp)
+ ("<M-backspace>" . backward-kill-sexp)
+ ("<M-delete>" . kill-sexp)
  ("M-[" . insert-parentheses)
  ("M-]" . move-past-close-and-reindent))
 
