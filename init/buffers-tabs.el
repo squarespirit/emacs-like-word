@@ -1,3 +1,5 @@
+(setq mw-key-topic "Buffers")
+
 (use-package centaur-tabs
   :demand
   :config
@@ -22,8 +24,8 @@
   (set-face-attribute 'centaur-tabs-unselected nil :background "#CCCCCC" :foreground "black")
   (set-face-attribute 'centaur-tabs-unselected-modified nil :background "#CCCCCC" :foreground "black")
 
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward)
-  ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
-  ("C-S-<next>" . centaur-tabs-move-current-tab-to-right))
+  (setq mw-key-topic "Buffers")
+  (mw-global-set-key (kbd "C-<prior>") 'centaur-tabs-backward "Previous tab")
+  (mw-global-set-key (kbd "C-<next>") 'centaur-tabs-forward "Next tab")
+  (mw-global-set-key (kbd "C-S-<prior>") 'centaur-tabs-move-current-tab-to-left "Move tab left")
+  (mw-global-set-key (kbd "C-S-<next>") 'centaur-tabs-move-current-tab-to-right "Move tab right"))

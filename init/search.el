@@ -20,9 +20,9 @@
       '((swiper . ivy--regex-plus)
         (t      . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
-  :bind (("C-f" . swiper)
-         ("C-e" . ivy-switch-buffer)
-         :map swiper-map
+  (setq mw-key-topic "Editing")
+  (mw-global-set-key (kbd "C-f") 'swiper "Find")
+  :bind (:map swiper-map
          ("C-f" . swiper-C-s)
          :map ivy-minibuffer-map
          ("<S-return>" . ivy-call)
@@ -33,4 +33,7 @@
 
 ;; So hydras work properly in ivy
 (use-package ivy-hydra)
+
+(setq mw-key-topic "Editing")
+(mw-global-set-key (kbd "M-i") 'imenu "File index")
 

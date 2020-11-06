@@ -6,3 +6,5 @@
 (setq pc-bufsw-decorator-left (propertize "<" 'face 'bold))
 (setq pc-bufsw-decorator-right (propertize ">" 'face 'bold))
 (setq pc-bufsw-selected-buffer-face 'bold)
+(setq mw-key-topic "Buffers")
+(mw-global-doc-key [C-tab] "Switch buffer")

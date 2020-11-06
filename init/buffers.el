@@ -1,4 +1,5 @@
-(bind-keys ("<C-f4>" . kill-current-buffer))
+(setq mw-key-topic "Buffers")
+(mw-global-set-key (kbd "<C-f4>") 'kill-current-buffer "Close buffer")
 (defun mw-is-buffer-ignored (name)
   "Return t if the buffer is a non-user buffer and should be ignored. This is defined once
 to provide a consistent interface across all buffer switchers."

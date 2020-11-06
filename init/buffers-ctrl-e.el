@@ -16,3 +16,6 @@
 		    :predicate
 		    (lambda (cand) (get-buffer cand)))))
   (ivy-rich-mode 1))
+
+(setq mw-key-topic "Buffers")
+(mw-global-set-key (kbd "C-e") 'ivy-switch-buffer "Search buffer by name")

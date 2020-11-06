@@ -51,21 +51,32 @@ doc: short description of key
     (mw--add-key-doc mw-key-topic mode-name key doc))
   )
 
+(defun mw--editing-is-empty (s)
+  "Hack to make \"Editing\" sort first in list"
+  (if (equal s "Editing") "" s))
+
+(defun mw--key-less (a b)
+  "Return true if a should appear before b in the key reference."
+  (let
+      ((atopic (mw--editing-is-empty (car a)))
+       (btopic (mw--editing-is-empty (car b)))
+       (amode (cadr a))
+       (bmode (cadr b)))
+    (cond
+     ((not (equal atopic btopic)) (string-lessp atopic btopic))
+     ((not (equal amode bmode)) (string-lessp amode bmode))
+     (t nil)
+     )
+    )
+  )
+	 
 (defun mw-key-reference ()
   "Display key reference in a new window."
   (interactive)
   (let (
 	;; Group keys by topic and mode.
 	;; But maintain the order of keys with the same topic and mode.
-	(sorted-key-docs
-	 (cl-stable-sort
-	  mw-key-docs
-	  (lambda (a b)
-	    (cond
-	     ((string-lessp (car a) (car b)) t)
-	     ((string-lessp (cadr a) (cadr b)) t)
-	     (t nil)
-	     ))))
+	(sorted-key-docs (cl-stable-sort mw-key-docs 'mw--key-less))
 	(temp-buf-name "Key Reference")
 	(current-topic "")
 	(current-mode ""))

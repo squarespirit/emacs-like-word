@@ -1,9 +1,13 @@
-;; Suggested global keybinds in https://orgmode.org/manual/Activation.html
-(bind-keys
- ("C-c l" . org-store-link)
- ("C-c a" . org-agenda)
- ("C-S-a" . org-agenda-list)
- ("C-c c" . org-capture))
+(setq mw-key-topic "Org")
+
+(require 'org)
+
+;; Global keybinds
+;; Some from https://orgmode.org/manual/Activation.html
+(mw-global-set-key (kbd "C-c l") 'org-store-link "Store link")
+(mw-global-set-key (kbd "C-c a") 'org-agenda "Agenda")
+(mw-global-set-key (kbd "C-S-a") 'org-agenda-list "Directly to agenda list")
+(mw-global-set-key (kbd "C-c c") 'org-capture "Capture")
 
 ;; Make org give up shift-arrow keys
 ;; https://orgmode.org/manual/Conflicts.html
@@ -12,7 +16,6 @@
 ;; Support shift-selection almost always...except editing timestamps
 (setq-default org-support-shift-select 'always)
 
-(require 'org)
 ;; Do not override these keys
 (bind-keys :map org-mode-map
 	   ("C-e" . nil)  ;; buf switcher
@@ -30,12 +33,11 @@
 ;; Smart paste in org mode
 (define-key org-mode-map (kbd "C-v") 'org-yank)
 ;; Todo states
-(define-key org-mode-map (kbd "C-t") 'org-todo)
+(mw-define-key 'org-mode-map (kbd "C-t") 'org-todo "Todo")
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)")))
 
-(bind-keys :map org-mode-map
-	   ("M-[" . org-previous-visible-heading)
-	   ("M-]" . org-next-visible-heading))
+(mw-define-key 'org-mode-map (kbd "<C-up>") 'org-previous-visible-heading "Previous heading")
+(mw-define-key 'org-mode-map (kbd "<C-down>") 'org-next-visible-heading "Next heading")
 
 ;; Looks
 (setq-default
@@ -73,8 +75,6 @@
   :hook (org-mode . org-autolist-mode))
 
 ;; Easier access keys
-(bind-keys
- :map org-mode-map
- ([C-i] . org-toggle-item)
- ("C-l" . org-toggle-heading)
- ("C-," . org-insert-structure-template))
+(mw-define-key 'org-mode-map [C-i] 'org-toggle-item "Toggle item")
+(mw-define-key 'org-mode-map (kbd "C-l") 'org-toggle-heading "Toggle heading")
+(mw-define-key 'org-mode-map (kbd "C-,") 'org-insert-structure-template "Structure template")

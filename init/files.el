@@ -1,13 +1,10 @@
-(bind-keys
-  ;; I'm sorry, there's just way too much muscle memory here.
- ("C-s" . save-buffer)
- ;; Note: this naturally uses the completing read function
- ("C-o" . find-file)
- ("C-S-s" . write-file))
-
-(use-package crux
-  :bind
-  ("C-c r" . crux-rename-buffer-and-file))
+(setq mw-key-topic "Files")
+(use-package crux)
+(mw-global-set-key (kbd "C-s") 'save-buffer "Save")
+(mw-global-set-key (kbd "C-S-s") 'save-buffer "Save as")
+(mw-global-set-key (kbd "C-o") 'save-buffer "Open")
+(mw-global-set-key (kbd "C-c r") 'crux-rename-buffer-and-file "Rename file")
+(mw-global-set-key (kbd "C-c f") 'crux-recentf-find-file "Recent files")
 
 ;; Move all the autosave files to one directory
 (setq backup-directory-alist

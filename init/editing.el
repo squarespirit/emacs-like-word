@@ -1,11 +1,7 @@
-;; Rebind some stuff that causes me pain
-(require 'bind-key)
-(bind-keys
- ;; Easier to hit.
- ("M-SPC" . cua-set-mark))
- ;;("M-/" . exchange-point-and-mark)
+(setq mw-key-topic "Editing")
+
 ;; Rebind to rectangle commands
-(bind-key "M-r" (lookup-key (current-global-map) (kbd "C-x r")))
+(mw-global-set-key (kbd "M-r") (lookup-key (current-global-map) (kbd "C-x r")) "Register/rectangle cmds")
 
 ;; Backspace/delete should not copy to clipboard
 ;; http://ergoemacs.org/emacs/emacs_kill-ring.html
@@ -41,7 +37,7 @@ This command does not push text to `kill-ring'."
 (global-unset-key (kbd "<insert>"))
 
 ;; Warning: works ok on real code, doesn't work that well in org mode source blocks
-(bind-keys ("C-/" . comment-line))
+(mw-global-set-key (kbd "C-/") 'comment-line "Comment line")
 
 ;; No Ctrl-home/end. I rarely intend to press it, though I often press it accidentally
 (global-unset-key (kbd "<C-home>"))
@@ -53,3 +49,10 @@ This command does not push text to `kill-ring'."
 ;; Mouse
 ;; Let shift-click extend selection
 (bind-keys ("<S-down-mouse-1>" . mouse-save-then-kill))
+
+(use-package crux)
+(bind-keys
+ ([remap move-beginning-of-line] . crux-move-beginning-of-line)
+ ("C-k" . crux-smart-kill-line))
+(mw-global-set-key (kbd "<S-return>") 'crux-smart-open-line "Insert line below")
+(mw-global-set-key (kbd "C-S-j") 'crux-top-join-line "Join lines")

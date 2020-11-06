@@ -1,3 +1,5 @@
+(setq mw-key-topic "Editing")
 (use-package expand-region
-  :bind (("C-w" . er/expand-region)
-         ("C-S-w" . er/contract-region)))
+  :config
+  (mw-global-set-key (kbd "C-=") 'er/expand-region "Expand region"))
+

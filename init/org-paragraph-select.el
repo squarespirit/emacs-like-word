@@ -10,12 +10,12 @@
   (interactive "^")
   "Go backward to previous paragraph; allow for shift selection"
   (org-backward-paragraph))
-(define-key org-mode-map (kbd "<C-up>") 'mw-org-backward-paragraph)
+;; (define-key org-mode-map (kbd "<C-up>") 'mw-org-backward-paragraph)
 (defun mw-org-forward-paragraph ()
   (interactive "^")
   "Go forward to next paragraph; allow for shift selection"
   (org-forward-paragraph))
-(define-key org-mode-map (kbd "<C-down>") 'mw-org-forward-paragraph)
+;; (define-key org-mode-map (kbd "<C-down>") 'mw-org-forward-paragraph)
 
 ;; Previous/next paragraph with smart beginning of line
 ;; Actually, do not do this, for simplicity/predictability.
