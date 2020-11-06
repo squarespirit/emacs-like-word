@@ -13,8 +13,9 @@
   ;; I never want to switch to the Emacs buffers anyway.
   ;; This is naive but at least reduces confusion about multiple groups
   ;; (defun centaur-tabs-buffer-groups () (list "single-group"))
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-modified-marker "●")
+  ;; Don't show because of autosave
+  ;; (setq centaur-tabs-set-modified-marker t)
+  ;; (setq centaur-tabs-modified-marker "●")
   ;; https://github.com/ema2159/centaur-tabs/blob/master/centaur-tabs-elements.el
   (set-face-attribute 'centaur-tabs-selected nil :background "#FDFDFD" :foreground "black")
   (set-face-attribute 'centaur-tabs-selected-modified nil :background "#FDFDFD" :foreground "black")
