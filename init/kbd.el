@@ -1,2 +1,3 @@
 ;; Distinguish some keys
-(define-key key-translation-map (kbd "C-i") [C-i])
+;; https://emacs.stackexchange.com/a/17510
+(define-key input-decode-map "\C-i" [C-i])
