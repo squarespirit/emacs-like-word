@@ -1,4 +1,4 @@
-(load-file (concat mw-init-dir "pc-bufsw.el"))
+(require 'pc-bufsw)
 ;; Unbind some strange key combos including M-[
 (setq pc-bufsw-keys '(([C-tab]) ([C-S-tab] [C-S-iso-lefttab])))
 (pc-bufsw +1)

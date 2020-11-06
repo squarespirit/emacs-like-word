@@ -1,6 +1,8 @@
 (defvar mw-init-dir (concat user-emacs-directory "init/")
   "Directory that contains all init files.")
 
+(add-to-list 'load-path (concat user-emacs-directory "load/"))
+
 (dolist
     (file '("gc.el"
 
