@@ -2,12 +2,9 @@
   :bind (("<f9>" . ace-window))
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
-(bind-keys
- ("<f10>" . delete-other-windows)
- ;; Easy to hit accidentally
- ("<f11>" . nil))
-(bind-keys ("<S-escape>" . keyboard-escape-quit))
-(bind-keys ("M-o" . other-window))
+(setq mw-key-topic "Windows")
+(mw-global-set-key (kbd "<S-escape>") 'keyboard-escape-quit "Close other windows")
+(mw-global-set-key (kbd "M-o") 'other-window "Switch window")
 (use-package transpose-frame
   :config
   (defun my-rotate-frame-clockwise-with-treemacs ()
