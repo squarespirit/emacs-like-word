@@ -50,6 +50,8 @@
 	    "session-config.el"
 
 	    "org-config.el"
+	    "org-paragraph-select.el"
+	    "org-metaleftright.el"
 	    "org-agenda.el"
 	    "org-src.el"
 

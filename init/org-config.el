@@ -37,11 +37,6 @@
 	   ("M-[" . org-previous-visible-heading)
 	   ("M-]" . org-next-visible-heading))
 
-(dolist
-    (file '("org-paragraph-select.el"
-	    "org-metaleftright.el"))
-  (load-file (concat mw-init-dir file)))
-
 ;; Looks
 (setq-default
   org-startup-indented t
