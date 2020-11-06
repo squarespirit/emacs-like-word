@@ -17,6 +17,12 @@
 ;; when org started up sometimes. This might work
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Visual-Line-Mode.html
 (global-visual-line-mode +1)
+;; But do not rebind keys
+(bind-keys
+ :map visual-line-mode-map
+ ([remap move-beginning-of-line] . nil)
+ ([remap move-end-of-line] . nil)
+ ([remap kill-line] . nil))
 
 ;; frame title like vscode. Why is :eval needed?
 (setq frame-title-format '((:eval (if (buffer-modified-p) "• ")) "%b - Emacs " emacs-version))
