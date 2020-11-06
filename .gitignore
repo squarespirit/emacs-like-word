@@ -2,7 +2,7 @@
 !.gitignore
 !init.el
 !config.org
-!pc-bufsw.el
 !README.org
 !/init
 /init/custom.el
+!/load
