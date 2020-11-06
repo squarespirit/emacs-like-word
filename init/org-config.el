@@ -2,6 +2,7 @@
 (bind-keys
  ("C-c l" . org-store-link)
  ("C-c a" . org-agenda)
+ ("C-S-a" . org-agenda-list)
  ("C-c c" . org-capture))
 
 ;; Make org give up shift-arrow keys
@@ -71,3 +72,14 @@
   (interactive)
   (org-refile '(4)))
 ;; (define-key org-mode-map (kbd "C-n") '+org-search)
+
+;; Somewhat easier list making
+(use-package org-autolist
+  :hook (org-mode . org-autolist-mode))
+
+;; Easier access keys
+(bind-keys
+ :map org-mode-map
+ ([C-i] . org-toggle-item)
+ ("C-l" . org-toggle-heading)
+ ("C-," . org-insert-structure-template))

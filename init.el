@@ -6,6 +6,8 @@
 
 	    "packages.el"
 
+	    "kbd.el"
+
 	    "esc.el"
 	    "cua-clipboard.el"
 	    "editing.el"
@@ -46,6 +48,8 @@
 	    "session-config.el"
 
 	    "org-config.el"
+	    "org-agenda.el"
+	    "org-src.el"
 
 	    "emacs-lisp.el"))
   (load-file (concat mw-init-dir file)))
