@@ -1,15 +1,16 @@
 (defvar mw-key-topic nil
-  "Topic of current keybinds. Should be set before any calls to mw-define-key or similar functions.")
+  "Topic of current keybinds. mw-global-set-key, etc. use this as the current topic when adding keys.
+Thus, this should be set before calling any such functions.")
 
 (defvar mw-key-docs nil
-  "Documentation of each key. It is a list of
-(topic, mode, key, doc). The list is ordered by when keys were added.")
+  "Documentation of each key. It is a list of (topic, mode, key, doc).
+topic is a string.
+mode is the mode in which the key is bound. Empty string means it's a global keybinding.
+key is the internal representation of key (after calling kbd).
+doc is a short string describing the function.")
 
 (defun mw--add-key-doc (topic mode key doc)
-  "Add a key to mw-key-docs.
-topic is current topic.
-mode is the name of a mode.
-key is the name of a key"
+  "Add a key to mw-key-docs."
   (cl-check-type topic string)
   (cl-check-type mode string)
   (cl-check-type key array)
@@ -21,7 +22,7 @@ key is the name of a key"
   (mw-doc-key "" key doc))
 
 (defun mw-global-set-key (key cmd doc)
-  "Globally set a key.
+  "Globally set a key and add it to mw-key-docs.
 key: key sequence to set - a vector
 cmd: symbol of command to set
 doc: short description of key
@@ -37,7 +38,7 @@ doc: short description of key
   (mw--add-key-doc mw-key-topic mode key doc))
 
 (defun mw-define-key (map key cmd doc)
-  "Define a key in a given map."
+  "Define a key in a given map and add it to mw-key-docs."
   (cl-check-type map symbol)
   (cl-check-type key array)
   ;; cmd could be symbol or keymap
@@ -56,7 +57,13 @@ doc: short description of key
   (if (equal s "Editing") "" s))
 
 (defun mw--key-less (a b)
-  "Return true if a should appear before b in the key reference."
+  "Return true if a should appear before b in the key reference.
+The desired sorting order is:
+Sort by topic. However, the 'Editing' topic should come first.
+Then sort by mode.
+Then, keep the keys in the order that they were defined in.
+This is important because keys that are defined nearby in code are likely to be
+related."
   (let
       ((atopic (mw--editing-is-empty (car a)))
        (btopic (mw--editing-is-empty (car b)))
@@ -73,15 +80,15 @@ doc: short description of key
 (defun mw-key-reference ()
   "Display key reference in a new window."
   (interactive)
+  ;; Group keys by topic and mode.
+  ;; But maintain the order of keys with the same topic and mode.	
+  (setq mw-key-docs (cl-stable-sort mw-key-docs 'mw--key-less))
   (let (
-	;; Group keys by topic and mode.
-	;; But maintain the order of keys with the same topic and mode.
-	(sorted-key-docs (cl-stable-sort mw-key-docs 'mw--key-less))
 	(temp-buf-name "Key Reference")
 	(current-topic "")
 	(current-mode ""))
     (with-output-to-temp-buffer temp-buf-name
-      (dolist (k sorted-key-docs)
+      (dolist (k mw-key-docs)
 	(if (not (equal (car k) current-topic))
 	    (progn
 	      (princ (format "\n%s ======================\n" (car k)))
@@ -92,7 +99,7 @@ doc: short description of key
 	    (progn
 	      (princ (format "\n%s mode:\n" (capitalize (cadr k))))
 	      (setq current-mode (cadr k))))
-	(princ (format "%s\t%s\n" (key-description (caddr k)) (cadddr k)))) 
+	(princ (format "%-16s%s\n" (key-description (caddr k)) (cadddr k)))) 
       )
     (switch-to-buffer-other-window temp-buf-name)
     ;; Quit with q
