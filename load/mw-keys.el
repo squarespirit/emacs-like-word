@@ -12,9 +12,13 @@ mode is the name of a mode.
 key is the name of a key"
   (cl-check-type topic string)
   (cl-check-type mode string)
-  (cl-check-type key string)
+  (cl-check-type key array)
   (cl-check-type doc string)
   (add-to-list 'mw-key-docs (list topic mode key doc) t))
+
+(defun mw-global-doc-key (key doc)
+  "Document a key, assuming it is already bound."
+  (mw-doc-key "" key doc))
 
 (defun mw-global-set-key (key cmd doc)
   "Globally set a key.
@@ -22,17 +26,21 @@ key: key sequence to set - a vector
 cmd: symbol of command to set
 doc: short description of key
 "
-  (cl-check-type key string)
-  (cl-check-type cmd symbol)
+  (cl-check-type key array)
+  ;; cmd could be symbol or keymap
   (cl-check-type doc string)
   (global-set-key key cmd)
   (mw--add-key-doc mw-key-topic "" key doc))
 
+(defun mw-doc-key (mode key doc)
+  "Document a key in some mode, assuming it is already bound."
+  (mw--add-key-doc mw-key-topic mode key doc))
+
 (defun mw-define-key (map key cmd doc)
   "Define a key in a given map."
   (cl-check-type map symbol)
-  (cl-check-type key string)
-  (cl-check-type cmd symbol)
+  (cl-check-type key array)
+  ;; cmd could be symbol or keymap
   (cl-check-type doc string)
   (define-key (symbol-value map) key cmd)
   (let* ((map-name (symbol-name map))
