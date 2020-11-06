@@ -16,6 +16,7 @@
  ("<M-S-left>" . sp-forward-barf-sexp)
  ("<M-backspace>" . sp-backward-kill-sexp)
  ("<M-delete>" . sp-kill-sexp)
+ ("M-d" . sp-splice-sexp)
  ("C-SPC" . sp-mark-sexp)
  ("C-t" . sp-transpose-sexp)
  ("M-[" . insert-parentheses)
